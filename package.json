@@ -1,5 +1,6 @@
 {
   "name": "progress-bar",
+  "proxy": "https://public-api.wordpress.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -4,26 +4,30 @@
 
   class App extends Component {
 
-    state = {
-      results: []
+    constructor(props){
+      super(props)
+      this.state = {
+        interests: []
+      }
     }
-
-    // this will need to fetch GET /sites/<site_id>/jetpack-search-stats on WPCOM V2 once auth is configured
-
-    componentDidMount() {
-      fetch('')
-      .then(res => res.json())
-      .then((data) => {
-        this.setState({ results: data })
-      })
-      .catch(console.log)
-    }
-
-    render () {
-      return (
-        // JSX to render goes here...
-      );
-    }
+ 
+  async componentDidMount() {
+    const response = await fetch( 'https://public-api.wordpress.com/wpcom/v2/read/interests' );
+    const json = await response.json();
+    this.setState( { response: json } );
+    console.log( json );
   }
+ 
+  render() {
+    return (
+        <div className="App">
+          <h1>Reader interests</h1>
+          <ul>
+            { this.state.response?.interests.map( interest => ( <li key={interest.slug}>{interest.title}</li>) ) }
+          </ul>
+        </div>
+    );
+  }
+}
 
   export default App;
