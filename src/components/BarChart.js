@@ -1,44 +1,41 @@
 import React from 'react';
 import { Chart, registerables } from 'chart.js';
+
 Chart.register(...registerables);
 
 export class BarChart extends React.Component {
     constructor(props) {
       super(props);
       this.canvasRef = React.createRef();
+      this.state = {
+      labels : this.props.data.map(d => d.data.label),
+      colors : this.props.data.map(d => d.data.backgroundColor),
+      moredata : this.props.data.map(d => d.data)
+      }
     }
   
-    componentDidUpdate() {
-      this.myChart.data.labels = this.props.data.map(d => d.label);
-      this.myChart.data.datasets[0].data = this.props.data.map(d => d.value);
-      this.myChart.update();
-    }
-  
-    componentDidMount() {
-      
+    componentDidMount() {    
+
       this.myChart = new Chart(this.canvasRef.current, {
         type: 'bar',
         options: {
+          indexAxis: 'y',
             maintainAspectRatio: false,
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  min: 0,
-                  max: 100
-                }
+            scales: {
+              x: {
+                stacked: true,
+              },
+              y: {
+                stacked: true
               }
-            ]
-          }
+            }
         },
-        data: {
-          labels: this.props.data.map(d => d.label),
-          datasets: [{
-            label: this.props.title,
-            data: this.props.data.map(d => d.value),
-            backgroundColor: this.props.color
-          }]
-        }
+
+        data:{
+          labels: ["Anna's Chart"],
+          datasets: this.props.data.map(d => d.data)
+        }        
+
       });
     }
   
