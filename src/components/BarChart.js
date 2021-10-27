@@ -19,13 +19,9 @@ export class BarChart extends React.Component {
         legend: { display: false },
         maintainAspectRatio: false,
         aspectRatio: 4,
-        layout: {
-          padding: 5,
-        },
         scales: {
           x: {
             stacked: true,
-            // max: 1500,
             grid: {
               display: false,
               drawBorder: false,
@@ -57,14 +53,10 @@ export class BarChart extends React.Component {
               pointStyle: "circle",
               boxWidth: 7,
               borderRadius: 100,
-              filter: function(legendItem, data) {
-                return !legendItem.text.includes('Remaining');
-           },
+              filter: function (legendItem, data) {
+                return !legendItem.text.includes("Remaining");
+              },
             },
-          },
-
-          title: {
-            display: false,
           },
         },
       },
