@@ -18,12 +18,12 @@ export class BarChart extends React.Component {
     this.myChart = new Chart(this.canvasRef.current, {
       type: "bar",
       options: {
-        borderRadius: Number.MAX_VALUE, 
-        borderSkipped: 'middle',
+        borderRadius: Number.MAX_VALUE,
+        borderSkipped: "middle",
         indexAxis: "y",
         legend: { display: false },
         maintainAspectRatio: false,
-        aspectRatio:  4,
+        aspectRatio: 4,
 
         scales: {
           x: {
@@ -50,19 +50,17 @@ export class BarChart extends React.Component {
         },
 
         plugins: {
-
           legend: {
             display: true,
             position: "bottom",
             align: "start",
-  
+
             labels: {
               usePointStyle: true,
               pointStyle: "circle",
               boxWidth: 7,
-              borderRadius:100,
-            }
-            
+              borderRadius: 100,
+            },
           },
 
           title: {
@@ -72,10 +70,8 @@ export class BarChart extends React.Component {
       },
 
       data: {
-
         labels: ["Record Meter"],
         datasets: this.props.data.map((d) => d.data),
-        
       },
     });
   }
