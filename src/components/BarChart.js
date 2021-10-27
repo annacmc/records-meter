@@ -13,13 +13,15 @@ export class BarChart extends React.Component {
     this.myChart = new Chart(this.canvasRef.current, {
       type: "bar",
       options: {
-        borderRadius: Number.MAX_VALUE,
+        borderRadius: 150,
         borderSkipped: "middle",
         indexAxis: "y",
         legend: { display: false },
         maintainAspectRatio: false,
         aspectRatio: 4,
-
+        layout: {
+          padding: 5,
+        },
         scales: {
           x: {
             stacked: true,
@@ -55,6 +57,9 @@ export class BarChart extends React.Component {
               pointStyle: "circle",
               boxWidth: 7,
               borderRadius: 100,
+              filter: function(legendItem, data) {
+                return !legendItem.text.includes('Remaining');
+           },
             },
           },
 
