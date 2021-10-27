@@ -14,9 +14,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>  
+      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', width:'50%'}}>
 <BarChart
-            data={this.state.data}
+        data={this.state.data}
           />
           
     </div>

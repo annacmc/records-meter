@@ -28,7 +28,7 @@ export class BarChart extends React.Component {
         scales: {
           x: {
             stacked: true,
-            max: 1500,
+            // max: 1500,
             grid: {
               display: false,
               drawBorder: false,
@@ -53,6 +53,16 @@ export class BarChart extends React.Component {
 
           legend: {
             display: true,
+            position: "bottom",
+            align: "start",
+  
+            labels: {
+              usePointStyle: true,
+              pointStyle: "circle",
+              boxWidth: 7,
+              borderRadius:100,
+            }
+            
           },
 
           title: {
@@ -62,8 +72,10 @@ export class BarChart extends React.Component {
       },
 
       data: {
+
         labels: ["Record Meter"],
         datasets: this.props.data.map((d) => d.data),
+        
       },
     });
   }
