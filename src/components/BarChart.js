@@ -18,12 +18,17 @@ export class BarChart extends React.Component {
     this.myChart = new Chart(this.canvasRef.current, {
       type: "bar",
       options: {
+        borderRadius: Number.MAX_VALUE, 
+        borderSkipped: 'middle',
         indexAxis: "y",
         legend: { display: false },
         maintainAspectRatio: false,
+        aspectRatio:  4,
+
         scales: {
           x: {
             stacked: true,
+            max: 1500,
             grid: {
               display: false,
               drawBorder: false,
@@ -43,17 +48,21 @@ export class BarChart extends React.Component {
             },
           },
         },
+
         plugins: {
+
           legend: {
-            display: false,
+            display: true,
           },
+
           title: {
             display: false,
           },
         },
       },
+
       data: {
-        labels: ["Anna's Chart"],
+        labels: ["Record Meter"],
         datasets: this.props.data.map((d) => d.data),
       },
     });
