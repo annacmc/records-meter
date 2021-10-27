@@ -7,11 +7,6 @@ export class BarChart extends React.Component {
   constructor(props) {
     super(props);
     this.canvasRef = React.createRef();
-    this.state = {
-      labels: this.props.data.map((d) => d.data.label),
-      colors: this.props.data.map((d) => d.data.backgroundColor),
-      moredata: this.props.data.map((d) => d.data),
-    };
   }
 
   componentDidMount() {
