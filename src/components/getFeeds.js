@@ -8,7 +8,10 @@ export class Feed extends React.Component {
 }
 
 export default function getFeeds() {
-  let data = {
+
+  let data,plandata = null
+  
+  data = {
     last_indexed_date: "2021-07-06T19:35:18+00:00",
     post_count: 159,
     post_type_breakdown: {
@@ -18,7 +21,7 @@ export default function getFeeds() {
     },
   };
 
-  let plandata = {
+  plandata = {
     search_subscriptions: [
       {
         ID: "17189738",
@@ -53,14 +56,20 @@ export default function getFeeds() {
     default_upgrade_bill_period: "monthly",
   };
 
+  // stop it right here if there's no data to use
+  if(!data || !plandata) {
+    return [[], generateSubTitle(null, null)];
+  }
+
   let feeds = [];
+  let currentCount = 0;
   // make sure there are items there before going any further
   let numItems = data.post_type_breakdown
     ? Object.keys(data.post_type_breakdown).length
     : null;
-  let currentCount = 0;
-  let tier = Object.values(plandata.search_subscriptions[0])[22];
-  let hasApi = true;
+  let tier = plandata.search_subscriptions
+    ? Object.values(plandata.search_subscriptions[0])[22]
+    : null;
 
   // set up an array of Jetpack suitable chart colors
   let colors = ["#3895BA", "#E68B28", "#AF7DD1", "#00BA37", "#DEB100"];
