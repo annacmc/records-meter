@@ -51,23 +51,14 @@ export class BarChart extends React.Component {
             display: true,
             text: "Your search records",
             align: "start",
-            layout: {
-              margin: {
-                  left: 500,
-                  right: 50,
-              },
-              padding: {
-                left: 500,
-                right: 50,
-            }
-          },
             font: {
               size: 24,
             },
           },
           subtitle: {
             display: true,
-            text: this.state.feed[2]+" records indexed out of the "+this.state.feed[1]+" alloted for your current plan",
+            text:
+              this.state.feed[1],
             align: "start",
             font: {
               size: 14,
