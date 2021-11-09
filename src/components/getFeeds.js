@@ -9,17 +9,19 @@ export class Feed extends React.Component {
 
 export default function getFeeds() {
 
-  let data = {
-    "last_indexed_date": "2021-07-06T19:35:18+00:00",
-    "post_count": 159,
-    "post_type_breakdown": {
-      "post": 104,
-      "page": 17,
-      "attachment": 38,
-    }
+  let data,plandata = null
+  
+  data = {
+    last_indexed_date: "2021-07-06T19:35:18+00:00",
+    post_count: 159,
+    post_type_breakdown: {
+      post: 104,
+      page: 17,
+      attachment: 38,
+    },
   };
 
-  let plandata =  {
+  plandata = {
     search_subscriptions: [
       {
         ID: "17189738",
@@ -54,33 +56,62 @@ export default function getFeeds() {
     default_upgrade_bill_period: "monthly",
   };
 
-  let feeds = [];
-  let numItems = Object.keys(data.post_type_breakdown).length;
-  let totalCount = 1000;
-  let currentCount = 0;
-  let tier = Object.values(plandata.search_subscriptions[0])[22];
+  // stop it right here if there's no data to use
+  if(!data || !plandata) {
+    return [[], generateSubTitle(null, null)];
+  }
 
+  let feeds = [];
+  let currentCount = 0;
+  // make sure there are items there before going any further
+  let numItems = data.post_type_breakdown
+    ? Object.keys(data.post_type_breakdown).length
+    : null;
+  let tier = plandata.search_subscriptions
+    ? Object.values(plandata.search_subscriptions[0])[22]
+    : null;
+
+  // set up an array of Jetpack suitable chart colors
   let colors = ["#3895BA", "#E68B28", "#AF7DD1", "#00BA37", "#DEB100"];
 
-  for (var i = 0; i < numItems; i++) {
-    let theData = Object.values(data.post_type_breakdown)[i];
-    let name = capitalizeFirstLetter(Object.keys(data.post_type_breakdown)[i]);
+  if (numItems > 0) {
+    for (var i = 0; i < numItems; i++) {
+      let theData = Object.values(data.post_type_breakdown)[i];
+      let name = capitalizeFirstLetter(
+        Object.keys(data.post_type_breakdown)[i]
+      );
 
-    feeds.push({
-      data: createData(theData, colors[i], name),
-    });
+      feeds.push({
+        data: createData(theData, colors[i], name),
+      });
 
-    currentCount = currentCount + theData;
+      currentCount = currentCount + theData;
+    }
   }
 
   // add filler spacing for remaining space
   feeds.push({
-    data: getRemainingSpace(totalCount, currentCount),
+    data: getRemainingSpace(tier, currentCount),
   });
 
-  console.log(capitalizeFirstLetter('foo bar bag'));
+  // checks to ensure there is a tier & record count before generating subtitle data
+  function generateSubTitle(tier, currentCount) {
+    if (!tier || !currentCount) {
+      return "There has been a problem accessing your search records (or you have nothing yet to index!)";
+    }
+    return (
+      currentCount +
+      " records indexed out of the " +
+      tier +
+      " alloted for your current plan"
+    );
+  }
 
-  return [feeds,tier,currentCount];
+  // trying some error handling
+  if (currentCount == 0 || tier == 0 || !tier || !currentCount) {
+    return [[], generateSubTitle(tier, currentCount)];
+  }
+  return [feeds, generateSubTitle(tier, currentCount)];
 }
 
 function capitalizeFirstLetter(string) {
