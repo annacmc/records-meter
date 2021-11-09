@@ -55,7 +55,9 @@ export default function getFeeds() {
 
   let feeds = [];
   // make sure there are items there before going any further
-  let numItems = data.post_type_breakdown ? Object.keys(data.post_type_breakdown).length : null
+  let numItems = data.post_type_breakdown
+    ? Object.keys(data.post_type_breakdown).length
+    : null;
   let currentCount = 0;
   let tier = Object.values(plandata.search_subscriptions[0])[22];
   let hasApi = true;

@@ -57,8 +57,7 @@ export class BarChart extends React.Component {
           },
           subtitle: {
             display: true,
-            text:
-              this.state.feed[1],
+            text: this.state.feed[1],
             align: "start",
             font: {
               size: 14,
