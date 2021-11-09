@@ -1,5 +1,6 @@
 import React from "react";
 import { Chart, registerables } from "chart.js";
+import getFeeds from "./getFeeds.js";
 
 Chart.register(...registerables);
 
@@ -7,6 +8,9 @@ export class BarChart extends React.Component {
   constructor(props) {
     super(props);
     this.canvasRef = React.createRef();
+    this.state = {
+      feed: getFeeds(),
+    };
   }
 
   componentDidMount() {
@@ -18,7 +22,7 @@ export class BarChart extends React.Component {
         indexAxis: "y",
         legend: { display: false },
         maintainAspectRatio: false,
-        aspectRatio: 4,
+        aspectRatio: 2.3,
         scales: {
           x: {
             stacked: true,
@@ -43,11 +47,36 @@ export class BarChart extends React.Component {
         },
 
         plugins: {
+          title: {
+            display: true,
+            text: "Your search records",
+            align: "start",
+            layout: {
+              margin: {
+                  left: 500,
+                  right: 50,
+              },
+              padding: {
+                left: 500,
+                right: 50,
+            }
+          },
+            font: {
+              size: 24,
+            },
+          },
+          subtitle: {
+            display: true,
+            text: this.state.feed[2]+" records indexed out of the "+this.state.feed[1]+" alloted for your current plan",
+            align: "start",
+            font: {
+              size: 14,
+            },
+          },
           legend: {
             display: true,
             position: "bottom",
             align: "start",
-
             labels: {
               usePointStyle: true,
               pointStyle: "circle",

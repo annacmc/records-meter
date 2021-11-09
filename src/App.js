@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: getFeeds(),
+      feed: getFeeds(),
     };
   }
 
@@ -19,9 +19,10 @@ class App extends React.Component {
           justifyContent: "center",
           alignItems: "center",
           width: "50%",
+          padding: "90px 20%",
         }}
       >
-        <BarChart data={this.state.data} />
+        <BarChart data={this.state.feed[0]} />
       </div>
     );
   }
