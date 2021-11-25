@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart, registerables } from "chart.js";
-import getFeeds from "./getFeeds.js";
+import getFeeds from "../lib/getFeeds.js";
 
 Chart.register(...registerables);
 

@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import getFeeds from "./components/getFeeds.js";
+import getFeeds from "./lib/getFeeds.js";
 import { BarChart } from "./components/BarChart";
 
 class App extends React.Component {
