@@ -18,6 +18,13 @@ export default function getFeeds() {
       post: 104,
       page: 17,
       attachment: 38,
+      anotherone: 21,
+      averyveryextrasuperlongernamesposttypethatgoesonandonandone: 15,
+      more: 22,
+      andmore: 4,
+      moremoremore: 2,
+      andthenmore: 6,
+      somany: 20
     },
   };
 
