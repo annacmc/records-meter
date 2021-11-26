@@ -20,7 +20,6 @@ export class BarChart extends React.Component {
         borderRadius: 150,
         borderSkipped: "middle",
         indexAxis: "y",
-        legend: { display: false },
         maintainAspectRatio: false,
         aspectRatio: 1.5,
         scales: {
@@ -30,7 +29,7 @@ export class BarChart extends React.Component {
               display: false,
               drawBorder: false,
             },
-            ticks: {
+            ticks: { 
               display: false,
             },
           },
