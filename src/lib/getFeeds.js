@@ -68,8 +68,11 @@ export default function getFeeds() {
     return [[], generateSubTitle(null, null)];
   }
 
+  // set max number of record types to display
+  let maxRecordCount = 5;
   let feeds = [];
   let currentCount = 0;
+
   // make sure there are items there before going any further
   let numItems = data.post_type_breakdown
     ? Object.keys(data.post_type_breakdown).length
@@ -79,10 +82,10 @@ export default function getFeeds() {
     : null;
 
   // set up an array of Jetpack suitable chart colors
-  let colors = ["#3895BA", "#E68B28", "#AF7DD1", "#00BA37", "#DEB100"];
+  let colors = ["#3895BA", "#E68B28", "#AF7DD1", "#00BA37", "#DEB100",];
 
   if (numItems > 0) {
-    for (var i = 0; i < numItems; i++) {
+    for (var i = 0; i < maxRecordCount; i++) {
       let theData = Object.values(data.post_type_breakdown)[i];
       let name = capitalizeFirstLetter(
         Object.keys(data.post_type_breakdown)[i]
