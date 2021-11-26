@@ -13,15 +13,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "50%",
-          padding: "90px 20%",
-        }}
-      >
+      <div>
         <BarChart data={this.state.feed[0]} />
       </div>
     );
