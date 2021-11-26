@@ -8,9 +8,9 @@ export class Feed extends React.Component {
 }
 
 export default function getFeeds() {
+  let data,
+    plandata = null;
 
-  let data,plandata = null
-  
   data = {
     last_indexed_date: "2021-07-06T19:35:18+00:00",
     post_count: 159,
@@ -18,6 +18,13 @@ export default function getFeeds() {
       post: 104,
       page: 17,
       attachment: 38,
+      anotherone: 21,
+      averyveryextrasuperlongernamesposttypethatgoesonandonandone: 15,
+      more: 22,
+      andmore: 4,
+      moremoremore: 2,
+      andthenmore: 6,
+      somany: 20,
     },
   };
 
@@ -57,12 +64,15 @@ export default function getFeeds() {
   };
 
   // stop it right here if there's no data to use
-  if(!data || !plandata) {
+  if (!data || !plandata) {
     return [[], generateSubTitle(null, null)];
   }
 
+  // set max number of record types to display
+  let maxRecordCount = 10;
   let feeds = [];
   let currentCount = 0;
+
   // make sure there are items there before going any further
   let numItems = data.post_type_breakdown
     ? Object.keys(data.post_type_breakdown).length
@@ -72,10 +82,24 @@ export default function getFeeds() {
     : null;
 
   // set up an array of Jetpack suitable chart colors
-  let colors = ["#3895BA", "#E68B28", "#AF7DD1", "#00BA37", "#DEB100"];
+  let colors = [
+    "#3895BA",
+    "#E68B28",
+    "#AF7DD1",
+    "#00BA37",
+    "#DEB100",
+    "#3895BA",
+    "#E68B28",
+    "#AF7DD1",
+    "#00BA37",
+    "#DEB100",
+  ];
 
   if (numItems > 0) {
-    for (var i = 0; i < numItems; i++) {
+    // make sure limit is not used if higher than record count
+    let count = maxRecordCount <= numItems ? maxRecordCount : numItems;
+
+    for (var i = 0; i < maxRecordCount; i++) {
       let theData = Object.values(data.post_type_breakdown)[i];
       let name = capitalizeFirstLetter(
         Object.keys(data.post_type_breakdown)[i]
