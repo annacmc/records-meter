@@ -1,11 +1,3 @@
-import React, { useState } from "react";
-
-export class Feed extends React.Component {
-  constructor(props) {
-    super(props);
-    this.canvasRef = React.createRef();
-  }
-}
 
 export default function getFeeds() {
   let data,
