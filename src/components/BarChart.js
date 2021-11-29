@@ -47,20 +47,10 @@ export class BarChart extends React.Component {
 
         plugins: {
           title: {
-            display: true,
-            text: "Your search records",
-            align: "start",
-            font: {
-              size: 24,
-            },
+            display: false,
           },
           subtitle: {
-            display: true,
-            text: this.state.feed[1],
-            align: "start",
-            font: {
-              size: 14,
-            },
+            display: false,
           },
           legend: {
             display: true,
