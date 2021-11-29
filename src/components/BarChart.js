@@ -77,6 +77,6 @@ export class BarChart extends React.Component {
   }
 
   render() {
-    return <canvas ref={this.canvasRef} />;
+    return <div><canvas ref={this.canvasRef} /></div>;
   }
 }
