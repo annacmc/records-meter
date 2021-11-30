@@ -57,7 +57,7 @@ export default function getFeeds() {
 
   // stop it right here if there's no data to use
   if (!data || !plandata) {
-    return "error";
+    return [null,null,null];
   }
 
   // set max number of record types to display
@@ -114,9 +114,14 @@ export default function getFeeds() {
 
   // trying some error handling
   if (currentCount == 0 || tier == 0 || !tier || !currentCount) {
-    return 'error';
+    return null;
   }
-  return [feeds, tier, currentCount];
+  // return [feeds, tier, currentCount];
+  return {
+    data: feeds,
+    tier: tier,
+    recordCount: currentCount,
+  }
 }
 
 function capitalizeFirstLetter(string) {
