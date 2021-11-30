@@ -62,6 +62,7 @@ export default function getFeeds() {
 
   // set max number of record types to display
   let maxRecordCount = 10;
+  
   let feeds = [];
   let currentCount = 0;
 

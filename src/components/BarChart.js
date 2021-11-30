@@ -1,6 +1,5 @@
 import React from "react";
 import { Chart, registerables } from "chart.js";
-import getFeeds from "../lib/getFeeds.js";
 
 Chart.register(...registerables);
 
@@ -8,9 +7,6 @@ export class BarChart extends React.Component {
   constructor(props) {
     super(props);
     this.canvasRef = React.createRef();
-    this.state = {
-      feed: getFeeds(),
-    };
   }
 
   componentDidMount() {
@@ -29,7 +25,7 @@ export class BarChart extends React.Component {
               display: false,
               drawBorder: false,
             },
-            ticks: { 
+            ticks: {
               display: false,
             },
           },
@@ -77,6 +73,10 @@ export class BarChart extends React.Component {
   }
 
   render() {
-    return <div class="chartContainer"><canvas ref={this.canvasRef} /></div>;
+    return (
+      <div class="chartContainer">
+        <canvas ref={this.canvasRef} />
+      </div>
+    );
   }
 }
