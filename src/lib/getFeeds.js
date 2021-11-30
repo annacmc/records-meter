@@ -1,11 +1,10 @@
-
 export default function getFeeds() {
   let data,
     plandata = null;
 
   data = {
     last_indexed_date: "2021-07-06T19:35:18+00:00",
-    post_count: 159,
+    post_count: 249,
     post_type_breakdown: {
       post: 104,
       page: 17,
@@ -57,11 +56,12 @@ export default function getFeeds() {
 
   // stop it right here if there's no data to use
   if (!data || !plandata) {
-    return [[], generateSubTitle(null, null)];
+    return [null, null, null];
   }
 
   // set max number of record types to display
   let maxRecordCount = 10;
+
   let feeds = [];
   let currentCount = 0;
 
@@ -110,24 +110,16 @@ export default function getFeeds() {
     data: getRemainingSpace(tier, currentCount),
   });
 
-  // checks to ensure there is a tier & record count before generating subtitle data
-  function generateSubTitle(tier, currentCount) {
-    if (!tier || !currentCount) {
-      return "There has been a problem accessing your search records (or you have nothing yet to index!)";
-    }
-    return (
-      currentCount +
-      " records indexed out of the " +
-      tier +
-      " alloted for your current plan"
-    );
-  }
-
   // trying some error handling
   if (currentCount == 0 || tier == 0 || !tier || !currentCount) {
-    return [[], generateSubTitle(tier, currentCount)];
+    return null;
   }
-  return [feeds, generateSubTitle(tier, currentCount)];
+  // return [feeds, tier, currentCount];
+  return {
+    data: feeds,
+    tier: tier,
+    recordCount: currentCount,
+  };
 }
 
 function capitalizeFirstLetter(string) {

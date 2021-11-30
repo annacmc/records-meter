@@ -15,8 +15,11 @@ class App extends React.Component {
   render() {
     return (
       <main>
-        <RecordCount recordCount={10} planRecordLimit={100} />
-        <BarChart data={this.state.feed[0]} />
+        <RecordCount
+          recordCount={this.state.feed.recordCount}
+          planRecordLimit={this.state.feed.tier}
+        />
+        <BarChart data={this.state.feed.data} />
       </main>
     );
   }
