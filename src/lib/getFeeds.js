@@ -1,4 +1,3 @@
-
 export default function getFeeds() {
   let data,
     plandata = null;
@@ -57,12 +56,12 @@ export default function getFeeds() {
 
   // stop it right here if there's no data to use
   if (!data || !plandata) {
-    return [null,null,null];
+    return [null, null, null];
   }
 
   // set max number of record types to display
   let maxRecordCount = 10;
-  
+
   let feeds = [];
   let currentCount = 0;
 
@@ -111,7 +110,6 @@ export default function getFeeds() {
     data: getRemainingSpace(tier, currentCount),
   });
 
-
   // trying some error handling
   if (currentCount == 0 || tier == 0 || !tier || !currentCount) {
     return null;
@@ -121,7 +119,7 @@ export default function getFeeds() {
     data: feeds,
     tier: tier,
     recordCount: currentCount,
-  }
+  };
 }
 
 function capitalizeFirstLetter(string) {
