@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import getFeeds from "./lib/getFeeds.js";
 import { BarChart } from "./components/BarChart";
+import { RecordCount } from "./components/RecordCount";
 
 class App extends React.Component {
   constructor(props) {
@@ -13,9 +14,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <main>
+        <RecordCount recordCount={10} planRecordLimit={100} />
         <BarChart data={this.state.feed[0]} />
-      </div>
+      </main>
     );
   }
 }
