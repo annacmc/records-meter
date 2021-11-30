@@ -5,7 +5,7 @@ export function RecordCount(props) {
     <div>
       {props.recordCount && props.planRecordLimit && (
         <p>
-          {props.recordCount} records indexed out of the {props.planRecordLimit}
+          {props.recordCount} records indexed out of the {props.planRecordLimit}{" "}
           alloted for your current plan
         </p>
       )}
