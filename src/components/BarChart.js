@@ -13,11 +13,11 @@ export class BarChart extends React.Component {
     this.myChart = new Chart(this.canvasRef.current, {
       type: "bar",
       options: {
-        borderRadius: 150,
+        borderRadius: 100,
         borderSkipped: "middle",
         indexAxis: "y",
         maintainAspectRatio: false,
-        aspectRatio: 1.5,
+        aspectRatio: 1.3,
         scales: {
           x: {
             stacked: true,
@@ -66,7 +66,6 @@ export class BarChart extends React.Component {
       },
     });
 
-    console.log(this.myChart.legend.legendItems);
     this.setState({ legendItems: this.myChart.legend.legendItems });
   }
 
@@ -82,7 +81,7 @@ export class BarChart extends React.Component {
                   <div
                     className="chartLegendBox"
                     style={{
-                      backgroundColor: item.fillStyle
+                      backgroundColor: item.fillStyle,
                     }}
                   />
                   {item.text} ({this.props.data[item.datasetIndex].data.data})
