@@ -75,10 +75,10 @@ export default function getFeeds() {
 
   // set up an array of Jetpack suitable chart colors
   let colors = [
+    "#00BA37",
     "#3895BA",
     "#E68B28",
     "#AF7DD1",
-    "#00BA37",
     "#DEB100",
     "#3895BA",
     "#E68B28",
