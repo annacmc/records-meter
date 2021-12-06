@@ -139,7 +139,7 @@ function getRemainingSpace(total, current) {
   let data = total - current;
   return {
     data: [data],
-    label: "Remaining" + " (" + data + ")",
+    label: "Remaining",
     backgroundColor: "rgb(245,245,245)",
   };
 }
