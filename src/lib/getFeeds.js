@@ -129,7 +129,7 @@ function capitalizeFirstLetter(string) {
 function createData(data, color, name) {
   return {
     data: [data],
-    label: name + "s (" + data + ")",
+    label: name,
     backgroundColor: color,
   };
 }
