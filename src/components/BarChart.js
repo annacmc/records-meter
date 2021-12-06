@@ -49,14 +49,9 @@ export class BarChart extends React.Component {
             display: false,
           },
           legend: {
-            display: true,
-            position: "bottom",
-            align: "start",
+            display: false,
+
             labels: {
-              usePointStyle: true,
-              pointStyle: "circle",
-              boxWidth: 7,
-              borderRadius: 100,
               filter: function (legendItem, data) {
                 return !legendItem.text.includes("Remaining");
               },
@@ -70,12 +65,31 @@ export class BarChart extends React.Component {
         datasets: this.props.data.map((d) => d.data),
       },
     });
+
+    console.log(this.myChart.legend.legendItems);
+    this.setState({ legendItems: this.myChart.legend.legendItems });
   }
 
   render() {
     return (
-      <div class="chartContainer">
+      <div className="chartContainer">
         <canvas ref={this.canvasRef} />
+        <ul className="chartLegend">
+          {this.state?.legendItems.length &&
+            this.state.legendItems.map((item) => {
+              return (
+                <li key={item.text}>
+                  <div
+                    className="chartLegendBox"
+                    style={{
+                      backgroundColor: item.fillStyle
+                    }}
+                  />
+                  {item.text} ({this.props.data[item.datasetIndex].data.data})
+                </li>
+              );
+            })}
+        </ul>
       </div>
     );
   }
