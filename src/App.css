@@ -1,13 +1,30 @@
 .chartContainer {
-  height: 80px;
+  height: 40px;
 }
 
 main {
-  padding: 60px;
+  padding: 5px;
+
 }
 
 .chartLegendBox {
-  margin-right: 8px;
-  width: 20px;
-  height: 20px;
+  margin-right: 5px;
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  display:inline-block;
+}
+
+ul.chartLegend {
+  padding-left: 0;
+}
+
+.chartLegend li  {
+  display:inline-block;
+  padding:5px;
+}
+.chartLegend {
+  list-style:none;
+  display: inline;
 }
