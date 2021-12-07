@@ -84,7 +84,7 @@ export class BarChart extends React.Component {
                       backgroundColor: item.fillStyle,
                     }}
                   />
-                  {item.text} ({this.props.data[item.datasetIndex].data.data})
+                  <span className="chartLegendLabel" children={item.text} /><span className="chartLegendCount">({this.props.data[item.datasetIndex].data.data})</span>
                 </li>
               );
             })}
