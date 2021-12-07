@@ -60,7 +60,7 @@ export default function getFeeds() {
   }
 
   // set max number of record types to display
-  let maxRecordCount = 10;
+  let maxRecordCount = 5;
 
   let feeds = [];
   let currentCount = 0;
@@ -105,6 +105,9 @@ export default function getFeeds() {
     }
   }
 
+  // sort feeds here before filler is added
+  feeds.sort((a, b) => (a.data.data[0] < b.data.data[0] ? 1 : -1));
+
   // add filler spacing for remaining space
   feeds.push({
     data: getRemainingSpace(tier, currentCount),
@@ -114,6 +117,7 @@ export default function getFeeds() {
   if (currentCount == 0 || tier == 0 || !tier || !currentCount) {
     return null;
   }
+
   // return [feeds, tier, currentCount];
   return {
     data: feeds,
