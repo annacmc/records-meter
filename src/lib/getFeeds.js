@@ -8,9 +8,9 @@ export default function getFeeds() {
     post_type_breakdown: {
       post: 104,
       page: 17,
-      attachment: 38,
+      attachment: 15,
       anotherone: 21,
-      averyveryextrasuperlongernamesposttypethatgoesonandonandone: 15,
+      averyveryextrasuperlongernamesposttypethatgoesonandonandone: 38,
       more: 22,
       andmore: 4,
       moremoremore: 2,

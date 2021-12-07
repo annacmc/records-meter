@@ -61,7 +61,7 @@ export class BarChart extends React.Component {
       },
 
       data: {
-        labels: ["Record Meter"],
+        labels: [""], // this empty label must remain, if removed the entire chart breaks
         datasets: this.props.data.map((d) => d.data),
       },
     });
