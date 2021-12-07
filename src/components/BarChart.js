@@ -72,7 +72,7 @@ export class BarChart extends React.Component {
   render() {
     return (
       <div className="chartContainer">
-        <canvas ref={this.canvasRef} />
+        <canvas ref={this.canvasRef} aria-label="Jetpack Search Record Type Chart" role="chart" />
         <ul className="chartLegend">
           {this.state?.legendItems.length &&
             this.state.legendItems.map((item) => {
