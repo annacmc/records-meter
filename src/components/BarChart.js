@@ -13,11 +13,11 @@ export class BarChart extends React.Component {
     this.myChart = new Chart(this.canvasRef.current, {
       type: "bar",
       options: {
-        borderRadius: 150,
+        borderRadius: 100,
         borderSkipped: "middle",
         indexAxis: "y",
         maintainAspectRatio: false,
-        aspectRatio: 1.5,
+        aspectRatio: 1.3,
         scales: {
           x: {
             stacked: true,
@@ -49,14 +49,9 @@ export class BarChart extends React.Component {
             display: false,
           },
           legend: {
-            display: true,
-            position: "bottom",
-            align: "start",
+            display: false,
+
             labels: {
-              usePointStyle: true,
-              pointStyle: "circle",
-              boxWidth: 7,
-              borderRadius: 100,
               filter: function (legendItem, data) {
                 return !legendItem.text.includes("Remaining");
               },
@@ -70,12 +65,30 @@ export class BarChart extends React.Component {
         datasets: this.props.data.map((d) => d.data),
       },
     });
+
+    this.setState({ legendItems: this.myChart.legend.legendItems });
   }
 
   render() {
     return (
-      <div class="chartContainer">
+      <div className="chartContainer">
         <canvas ref={this.canvasRef} />
+        <ul className="chartLegend">
+          {this.state?.legendItems.length &&
+            this.state.legendItems.map((item) => {
+              return (
+                <li key={item.text}>
+                  <div
+                    className="chartLegendBox"
+                    style={{
+                      backgroundColor: item.fillStyle,
+                    }}
+                  />
+                  <span className="chartLegendLabel" children={item.text} /><span className="chartLegendCount">({this.props.data[item.datasetIndex].data.data})</span>
+                </li>
+              );
+            })}
+        </ul>
       </div>
     );
   }

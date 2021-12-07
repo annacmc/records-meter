@@ -1,7 +1,41 @@
 .chartContainer {
-  height: 80px;
+  height: 40px;
 }
 
 main {
-  padding: 60px;
+  padding: 5px;
+
+}
+
+.chartLegendBox {
+  margin-right: 3px;
+  margin-left: 6px;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  display:inline-block;
+}
+
+.chartLegend {
+  list-style:none;
+  display: inline;
+  display:inline-block;
+}
+
+ul.chartLegend {
+  padding-left: 0;
+}
+
+.chartLegend li {
+  display:inherit;
+  padding-bottom:15px;
+}
+
+.chartLegend li .chartLegendLabel, .chartLegend li .chartLegendCount {
+  max-width: 200px;
+  padding-right:3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:inherit;
 }
