@@ -88,7 +88,6 @@ export default function getFeeds() {
       postTypeBreakdown.push({
         data: createData(theData, colors[i], name),
       });
-
       currentCount = currentCount + theData;
     }
   }
@@ -96,16 +95,15 @@ export default function getFeeds() {
   // sort post types by count size
   postTypeBreakdown.sort((a, b) => (a.data.data[0] < b.data.data[0] ? 1 : -1));
 
-  console.log(postTypeBreakdown);
-
   // slice post type breakdown items after they are sorted & make sure limit is not used if higher than record count
   let count = maxRecordCount <= numItems ? maxRecordCount : numItems;
 
   const includedItems = postTypeBreakdown.slice(0, count);
-  const otherItems = postTypeBreakdown.slice(count - 1, -1);
+  const otherItems = postTypeBreakdown.slice(count, numItems);
 
   // push includedItems into the feeds
   for (var item in includedItems) {
+    console.log('included item '+ item +' '+includedItems[item].data.data[0])
     feeds.push({
       data: createData(
         includedItems[item].data.data[0],
@@ -113,6 +111,10 @@ export default function getFeeds() {
         includedItems[item].data.label
       ),
     });
+  }
+
+  for (var item in otherItems) {
+    console.log('other item '+ item +' '+otherItems[item].data.data[0])
   }
 
   // populate the 'other' category with combined remaining items and push to end of data array
