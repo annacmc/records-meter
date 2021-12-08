@@ -1,3 +1,4 @@
+
 export default function getFeeds() {
   let data,
     plandata = null;
@@ -53,11 +54,6 @@ export default function getFeeds() {
     supports_search: true,
     default_upgrade_bill_period: "monthly",
   };
-
-  // stop it right here if there's no data to use
-  if (!data || !plandata) {
-    return [null, null, null];
-  }
 
   // set max number of record types to display
   let maxRecordCount = 5;
