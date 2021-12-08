@@ -64,12 +64,8 @@ export default function getFeeds() {
   let currentCount = 0;
 
   // make sure there are items there before going any further
-  let numItems = data.post_type_breakdown
-    ? Object.keys(data.post_type_breakdown).length
-    : null;
-  let tier = plandata.search_subscriptions
-    ? Object.values(plandata.search_subscriptions[0])[22]
-    : null;
+  let numItems = Object.keys(data.post_type_breakdown).length
+  let tier = Object.values(plandata.search_subscriptions[0])[22]
 
   // set up an array of Jetpack suitable chart colors to use (note: there must be at least the same number of colors here as set in 'maxrecordcount' var)
   // this will be coming from @automattic/color-studio once ported into wp-admin
