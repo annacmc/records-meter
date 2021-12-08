@@ -124,7 +124,7 @@ export default function getFeeds() {
 
   // add filler spacing for remaining unused space
   feeds.push({
-    data: getRemainingSpace(tier, currentCount),
+    data: createData((tier-currentCount),"rgb(245,245,245)","Remaining"),
   });
 
   // trying some error handling
@@ -160,15 +160,5 @@ function createData(data, color, name) {
     data: [data],
     label: name,
     backgroundColor: color,
-  };
-}
-
-// Generation of empty space (to work with ChartJS styling)
-function getRemainingSpace(total, current) {
-  let data = total - current;
-  return {
-    data: [data],
-    label: "Remaining",
-    backgroundColor: "rgb(245,245,245)",
   };
 }
