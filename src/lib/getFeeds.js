@@ -119,11 +119,6 @@ export default function getFeeds() {
     data: createData((tier-currentCount),"rgb(245,245,245)","Remaining"),
   });
 
-  // trying some error handling
-  if (currentCount == 0 || tier == 0 || !tier || !currentCount) {
-    return null;
-  }
-
   // return [feeds, tier, currentCount];
   return {
     data: feeds,
