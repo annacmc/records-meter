@@ -80,12 +80,9 @@ export function splitUsablePostTypes(
 
   let count = maxRecordCount <= numItems ? maxRecordCount : numItems;
 
-  const includedItems = postTypeBreakdown.slice(0, count);
-  const otherItems = postTypeBreakdown.slice(count, numItems);
-
   return {
-    includedItems: includedItems,
-    otherItems: otherItems,
+    includedItems: postTypeBreakdown.slice(0, count),
+    otherItems: postTypeBreakdown.slice(count, numItems),
   };
 }
 
