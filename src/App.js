@@ -1,14 +1,16 @@
 import React from "react";
 import "./App.css";
 import getFeeds from "./lib/getFeeds.js";
+import getData from "./lib/getData.js";
 import { BarChart } from "./components/BarChart";
 import { RecordCount } from "./components/RecordCount";
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      feed: getFeeds(),
+      feed: getFeeds(getData().data,getData().planInfo)
     };
   }
 
