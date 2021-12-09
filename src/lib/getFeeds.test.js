@@ -16,13 +16,18 @@ test("compares post_count to post_type_breakdown summed", () => {
 });
 
 test("creates a data object using createData", () => {
-
-  const newObject = getFeeds.createData(20,"rgb(245,245,245)",
-  "Testing");
+  const newObject = getFeeds.createData(20, "rgb(245,245,245)", "Testing");
 
   expect(newObject).toEqual({
     data: [20],
     label: "Testing",
     backgroundColor: "rgb(245,245,245)",
   });
+});
+
+test("capitalizes first letter using capitalizeFirstLetter", () => {
+  const stringToTest = "i am a string";
+  const capializedString = getFeeds.capitalizeFirstLetter(stringToTest)
+
+  expect(capializedString).toBe("I am a string");
 });
