@@ -1,5 +1,4 @@
-export default function getFeeds(data,planInfo) {
-
+export default function getFeeds(data, planInfo) {
   // set max number of record types to display
   let maxRecordCount = 5;
 
@@ -53,7 +52,7 @@ export default function getFeeds(data,planInfo) {
   // populate the 'other' category with combined remaining items and push to end of data array
   feeds.push({
     data: createData(
-      createOtherCategory(otherItems),
+      combineOtherCount(otherItems),
       "	rgb(169,169,169)",
       "Other"
     ),
@@ -72,8 +71,9 @@ export default function getFeeds(data,planInfo) {
   };
 }
 
-// function to combine remaining items into 'other' category
-function createOtherCategory(otherItems) {
+// function to combine remaining item count for use in 'other' category
+// returns an int which is the sum of all remaining 'other' item type counts.
+function combineOtherCount(otherItems) {
   let runningTotal = 0;
 
   for (var item in otherItems) {
