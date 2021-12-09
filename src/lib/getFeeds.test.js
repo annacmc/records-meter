@@ -15,12 +15,14 @@ test("compares post_count to post_type_breakdown summed", () => {
   expect(testData.post_count).toEqual(sumValues(testData.post_type_breakdown));
 });
 
-test("tests getRemainingSpace", () => {
-  const remainingSpace = getFeeds.getRemainingSpace(20, 5);
+test("tests creating a data object using createData", () => {
 
-  expect(remainingSpace).toEqual({
-    data: [15],
-    label: "Remaining",
+  const newObject = getFeeds.createData(20,"rgb(245,245,245)",
+  "Testing");
+
+  expect(newObject).toEqual({
+    data: [20],
+    label: "Testing",
     backgroundColor: "rgb(245,245,245)",
   });
 });

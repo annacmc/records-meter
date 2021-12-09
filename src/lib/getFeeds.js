@@ -102,7 +102,7 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function createData(data, color, name) {
+export function createData(data, color, name) {
   return {
     data: [data],
     label: name,
