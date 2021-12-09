@@ -1,5 +1,4 @@
-export default function getFeeds(data,planInfo) {
-
+export default function getFeeds(data, planInfo) {
   // set max number of record types to display
   let maxRecordCount = 5;
 
