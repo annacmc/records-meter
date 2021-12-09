@@ -15,7 +15,7 @@ test("compares post_count to post_type_breakdown summed", () => {
   expect(testData.post_count).toEqual(sumValues(testData.post_type_breakdown));
 });
 
-test("tests creating a data object using createData", () => {
+test("creates a data object using createData", () => {
 
   const newObject = getFeeds.createData(20,"rgb(245,245,245)",
   "Testing");
