@@ -50,6 +50,24 @@ test("compares post_count to post_type_breakdown summed", () => {
   expect(testData.post_count).toEqual(sumValues(testData.post_type_breakdown));
 });
 
+test("splits posts into usable and other", () => {
+  const postTypeBreakdown = testData.post_type_breakdown;
+  const numItems = 3
+  const maxRecordCount = 1
+
+  const splitPostTypes = splitUsablePostTypes(
+    postTypeBreakdown,
+    numItems,
+    maxRecordCount
+  );
+
+  expect(splitPostTypes).toEqual({
+    data: [20],
+    label: "Testing",
+    backgroundColor: "rgb(245,245,245)",
+  });
+});
+
 test("creates a data object using createData", () => {
   const newObject = getFeeds.createData(20, "rgb(245,245,245)", "Testing");
 
