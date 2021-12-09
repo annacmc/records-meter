@@ -1,4 +1,4 @@
-export default function getFeeds(data,planData) {
+export default function getFeeds(data,planInfo) {
 
   // set max number of record types to display
   let maxRecordCount = 5;
@@ -10,7 +10,7 @@ export default function getFeeds(data,planData) {
 
   // make sure there are items there before going any further
   let numItems = Object.keys(data.post_type_breakdown).length;
-  let tier = Object.values(planData.search_subscriptions[0])[22];
+  let tier = Object.values(planInfo.search_subscriptions[0])[22];
 
   // set up an array of Jetpack suitable chart colors to use (note: there must be at least the same number of colors here as set in 'maxrecordcount' var)
   // this will be coming from @automattic/color-studio once ported into wp-admin
