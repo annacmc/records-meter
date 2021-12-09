@@ -50,8 +50,8 @@ export default function getFeeds(data, planInfo) {
   // populate the 'other' category with combined remaining items and push to end of data array
   feeds.push({
     data: createData(
-      combineOtherCount(PostTypeItems.otherItems),
-      "	rgb(169,169,169)",
+      createOtherCategory(otherItems),
+      "rgb(169,169,169)",
       "Other"
     ),
   });
@@ -98,10 +98,12 @@ function combineOtherCount(otherItems) {
   return runningTotal;
 }
 
+// function to capitalize the first letter of any string
 export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+// function to return chart-ready data
 export function createData(data, color, name) {
   return {
     data: [data],
