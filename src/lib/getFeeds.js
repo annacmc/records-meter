@@ -29,22 +29,20 @@ export default function getFeeds(data, planInfo) {
     }
   }
 
-  // sort post types by count size
-  postTypeBreakdown.sort((a, b) => (a.data.data[0] < b.data.data[0] ? 1 : -1));
-
-  // slice post type breakdown items after they are sorted & make sure limit is not used if higher than record count
-  let count = maxRecordCount <= numItems ? maxRecordCount : numItems;
-
-  const includedItems = postTypeBreakdown.slice(0, count);
-  const otherItems = postTypeBreakdown.slice(count, numItems);
+  // sort & split items into included and other
+  const PostTypeItems = splitUsablePostTypes(
+    postTypeBreakdown,
+    numItems,
+    maxRecordCount
+  );
 
   // push includedItems into the feeds
-  for (var item in includedItems) {
+  for (var item in PostTypeItems.includedItems) {
     feeds.push({
       data: createData(
-        includedItems[item].data.data[0],
+        PostTypeItems.includedItems[item].data.data[0],
         colors[item],
-        includedItems[item].data.label
+        PostTypeItems.includedItems[item].data.label
       ),
     });
   }
@@ -52,7 +50,7 @@ export default function getFeeds(data, planInfo) {
   // populate the 'other' category with combined remaining items and push to end of data array
   feeds.push({
     data: createData(
-      createOtherCategory(otherItems),
+      combineOtherCount(PostTypeItems.otherItems),
       "	rgb(169,169,169)",
       "Other"
     ),
@@ -71,8 +69,29 @@ export default function getFeeds(data, planInfo) {
   };
 }
 
-// function to combine remaining items into 'other' category
-function createOtherCategory(otherItems) {
+// function to decide which post types are being displayed,
+// and which are combined into the 'other' category
+export function splitUsablePostTypes(
+  postTypeBreakdown,
+  numItems,
+  maxRecordCount
+) {
+  postTypeBreakdown.sort((a, b) => (a.data.data[0] < b.data.data[0] ? 1 : -1));
+
+  let count = maxRecordCount <= numItems ? maxRecordCount : numItems;
+
+  const includedItems = postTypeBreakdown.slice(0, count);
+  const otherItems = postTypeBreakdown.slice(count, numItems);
+
+  return {
+    includedItems: includedItems,
+    otherItems: otherItems,
+  };
+}
+
+// function to combine remaining item count for use in 'other' category
+// returns an int which is the sum of all remaining 'other' item type counts.
+function combineOtherCount(otherItems) {
   let runningTotal = 0;
 
   for (var item in otherItems) {
