@@ -88,7 +88,7 @@ export function splitUsablePostTypes(
 
 // function to combine remaining item count for use in 'other' category
 // returns an int which is the sum of all remaining 'other' item type counts.
-function combineOtherCount(otherItems) {
+export function combineOtherCount(otherItems) {
   let runningTotal = 0;
 
   for (var item in otherItems) {

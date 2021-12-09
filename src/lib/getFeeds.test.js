@@ -10,6 +10,29 @@ const testData = {
   },
 };
 
+const postTypeBreakdown = [
+  {
+    data: {
+      data: [17],
+      label: "Page",
+      backgroundColor: "#3895BA",
+    },
+  },
+  {
+    data: {
+      data: [15],
+      label: "Attachment",
+      backgroundColor: "#E68B28",
+    },
+  },
+  {
+    data: {
+      data: [6],
+      label: "Andthenmore",
+    },
+  },
+];
+
 const testPlanInfo = {
   search_subscriptions: [
     {
@@ -51,21 +74,15 @@ test("compares post_count to post_type_breakdown summed", () => {
 });
 
 test("splits posts into usable and other", () => {
-  const postTypeBreakdown = testData.post_type_breakdown;
-  const numItems = 3
-  const maxRecordCount = 1
+  const maxRecordCount = 1;
 
-  const splitPostTypes = splitUsablePostTypes(
+  const splitPostTypes = getFeeds.splitUsablePostTypes(
     postTypeBreakdown,
-    numItems,
+    testData.post_count,
     maxRecordCount
   );
-
-  expect(splitPostTypes).toEqual({
-    data: [20],
-    label: "Testing",
-    backgroundColor: "rgb(245,245,245)",
-  });
+  expect(splitPostTypes.includedItems.length).toBe(maxRecordCount);
+  expect(splitPostTypes.otherItems.length).toBe(2);
 });
 
 test("creates a data object using createData", () => {
@@ -86,29 +103,6 @@ test("capitalizes first letter using capitalizeFirstLetter", () => {
 });
 
 test("combine count of remaining items", () => {
-  const otherItems = [
-    {
-      data: {
-        data: [17],
-        label: "Page",
-        backgroundColor: "#3895BA",
-      },
-    },
-    {
-      data: {
-        data: [15],
-        label: "Attachment",
-        backgroundColor: "#E68B28",
-      },
-    },
-    {
-      data: {
-        data: [6],
-        label: "Andthenmore",
-      },
-    },
-  ];
-  const otherCategory = getFeeds.createOtherCategory(otherItems);
-
+  const otherCategory = getFeeds.combineOtherCount(postTypeBreakdown);
   expect(otherCategory).toBe(38);
 });
