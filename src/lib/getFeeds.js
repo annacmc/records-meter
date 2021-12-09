@@ -1,63 +1,4 @@
-export default function getFeeds() {
-  let data,
-    plandata = null;
-
-  data = {
-    last_indexed_date: "2021-07-06T19:35:18+00:00",
-    post_count: 249,
-    post_type_breakdown: {
-      post: 104,
-      page: 17,
-      attachment: 15,
-      anotherone: 21,
-      averyveryextrasuperlongernamesposttypethatgoesonandonandone: 38,
-      more: 22,
-      andmore: 4,
-      moremoremore: 2,
-      andthenmore: 6,
-      somany: 20,
-    },
-  };
-
-  plandata = {
-    search_subscriptions: [
-      {
-        ID: "17189738",
-        user_id: "6487293",
-        blog_id: "186671816",
-        product_id: "2105",
-        expiry: "2022-07-09",
-        subscribed_date: "2021-06-09 07:33:14",
-        renew: true,
-        auto_renew: true,
-        ownership_id: "27808225",
-        most_recent_renew_date: "",
-        subscription_status: "active",
-        product_name: "Jetpack Search",
-        product_name_en: "Jetpack Search",
-        product_slug: "jetpack_search_monthly",
-        product_type: "search",
-        cost: 19,
-        currency: "NZD",
-        bill_period: "31",
-        available: "yes",
-        multi: true,
-        support_document: null,
-        is_instant_search: true,
-        // tier: "up_to_1k_records",
-        tier: 1000, // this needs work
-      },
-    ],
-    supports_instant_search: true,
-    supports_only_classic_search: false,
-    supports_search: true,
-    default_upgrade_bill_period: "monthly",
-  };
-
-  // stop it right here if there's no data to use
-  if (!data || !plandata) {
-    return [null, null, null];
-  }
+export default function getFeeds(data,planData) {
 
   // set max number of record types to display
   let maxRecordCount = 5;
@@ -68,12 +9,8 @@ export default function getFeeds() {
   let currentCount = 0;
 
   // make sure there are items there before going any further
-  let numItems = data.post_type_breakdown
-    ? Object.keys(data.post_type_breakdown).length
-    : null;
-  let tier = plandata.search_subscriptions
-    ? Object.values(plandata.search_subscriptions[0])[22]
-    : null;
+  let numItems = Object.keys(data.post_type_breakdown).length;
+  let tier = Object.values(planData.search_subscriptions[0])[22];
 
   // set up an array of Jetpack suitable chart colors to use (note: there must be at least the same number of colors here as set in 'maxrecordcount' var)
   // this will be coming from @automattic/color-studio once ported into wp-admin
@@ -124,13 +61,8 @@ export default function getFeeds() {
 
   // add filler spacing for remaining unused space
   feeds.push({
-    data: getRemainingSpace(tier, currentCount),
+    data: createData(tier - currentCount, "rgb(245,245,245)", "Remaining"),
   });
-
-  // trying some error handling
-  if (currentCount == 0 || tier == 0 || !tier || !currentCount) {
-    return null;
-  }
 
   // return [feeds, tier, currentCount];
   return {
@@ -160,15 +92,5 @@ function createData(data, color, name) {
     data: [data],
     label: name,
     backgroundColor: color,
-  };
-}
-
-// Generation of empty space (to work with ChartJS styling)
-function getRemainingSpace(total, current) {
-  let data = total - current;
-  return {
-    data: [data],
-    label: "Remaining",
-    backgroundColor: "rgb(245,245,245)",
   };
 }
