@@ -13,13 +13,16 @@ export default function getFeeds(data, planInfo) {
   if (
     "object" !== typeof data ||
     "object" !== typeof data.post_type_breakdown ||
-    "object" !== typeof planInfo  
+    "object" !== typeof planInfo
   ) {
     hasValidData = false;
   }
 
   //check if site has likely been indexed.
-  if ("undefined" === typeof data.last_indexed_date || "undefined" === typeof data.post_count) {
+  if (
+    "undefined" === typeof data.last_indexed_date ||
+    "undefined" === typeof data.post_count
+  ) {
     hasBeenIndexed = false;
   }
 
@@ -79,10 +82,12 @@ export default function getFeeds(data, planInfo) {
       });
     }
 
-    // add filler spacing for remaining unused space
-    feeds.push({
-      data: createData(tier - currentCount, "rgb(245,245,245)", "Remaining"),
-    });
+    // if there is remaining unused space in tier, add filler spacing to chart
+    if (tier - currentCount > 0) {
+      feeds.push({
+        data: createData(tier - currentCount, "rgb(245,245,245)", "Remaining"),
+      });
+    }
   }
 
   // return
