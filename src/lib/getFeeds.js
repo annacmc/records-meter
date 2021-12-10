@@ -90,9 +90,11 @@ export default function getFeeds(data, planInfo) {
     }
   }
 
-  // return
+// return
   return {
     data: feeds,
+    tier: tier,
+    recordCount: currentCount,
   };
 }
 
