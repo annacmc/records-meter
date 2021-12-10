@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       feed: getFeeds(getData().data,getData().planInfo)
+      // feed: getFeeds("a",getData().planInfo)
     };
   }
 
