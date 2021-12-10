@@ -72,7 +72,7 @@ export default function getFeeds(data, planInfo) {
     }
 
     // populate the 'other' category with combined remaining items and push to end of data array
-    if (PostTypeItems.otherItems > 0) {
+    if (PostTypeItems.otherItems.length > 0) {
       feeds.push({
         data: createData(
           combineOtherCount(PostTypeItems.otherItems),
