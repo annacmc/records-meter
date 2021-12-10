@@ -6,16 +6,41 @@ export default function getFeeds(data, planInfo) {
   let feeds = [];
   let postTypeBreakdown = [];
   let currentCount = 0;
+  let hasValidData = true;
+  let hasBeenIndexed = true;
+
+  //check for valid data coming in and catch it before it goes to far
+  if (
+    "object" !== typeof data ||
+    "object" !== typeof data.post_type_breakdown ||
+    "object" !== typeof planInfo
+  ) {
+    hasValidData = false;
+  }
+
+  //check if site has likely been indexed.
+  if (
+    "undefined" === typeof data.last_indexed_date ||
+    "undefined" === typeof data.post_count
+  ) {
+    hasBeenIndexed = false;
+  }
 
   // make sure there are items there before going any further
-  let numItems = Object.keys(data.post_type_breakdown).length;
+  const numItems =
+    hasValidData && hasBeenIndexed
+      ? Object.keys(data.post_type_breakdown).length
+      : 0;
+
+  const count = maxRecordCount <= numItems ? maxRecordCount : numItems;
+
   let tier = Object.values(planInfo.search_subscriptions[0])[22];
 
   // set up an array of Jetpack suitable chart colors to use (note: there must be at least the same number of colors here as set in 'maxrecordcount' var)
   // this will be coming from @automattic/color-studio once ported into wp-admin
   let colors = ["#00BA37", "#3895BA", "#E68B28", "#AF7DD1", "#DEB100"];
 
-  if (numItems > 0) {
+  if (numItems > 0 && hasValidData && hasBeenIndexed) {
     for (var i = 0; i < numItems; i++) {
       let theData = Object.values(data.post_type_breakdown)[i];
       let name = capitalizeFirstLetter(
@@ -27,41 +52,45 @@ export default function getFeeds(data, planInfo) {
       });
       currentCount = currentCount + theData;
     }
+
+    // sort & split items into included and other
+    const PostTypeItems = splitUsablePostTypes(
+      postTypeBreakdown,
+      numItems,
+      maxRecordCount
+    );
+
+    // push includedItems into the feeds
+    for (var item in PostTypeItems.includedItems) {
+      feeds.push({
+        data: createData(
+          PostTypeItems.includedItems[item].data.data[0],
+          colors[item],
+          PostTypeItems.includedItems[item].data.label
+        ),
+      });
+    }
+
+    // populate the 'other' category with combined remaining items and push to end of data array
+    if (PostTypeItems.otherItems.length > 0) {
+      feeds.push({
+        data: createData(
+          combineOtherCount(PostTypeItems.otherItems),
+          "rgb(169,169,169)",
+          "Other"
+        ),
+      });
+    }
+
+    // if there is remaining unused space in tier, add filler spacing to chart
+    if (tier - currentCount > 0) {
+      feeds.push({
+        data: createData(tier - currentCount, "rgb(245,245,245)", "Remaining"),
+      });
+    }
   }
 
-  // sort & split items into included and other
-  const PostTypeItems = splitUsablePostTypes(
-    postTypeBreakdown,
-    numItems,
-    maxRecordCount
-  );
-
-  // push includedItems into the feeds
-  for (var item in PostTypeItems.includedItems) {
-    feeds.push({
-      data: createData(
-        PostTypeItems.includedItems[item].data.data[0],
-        colors[item],
-        PostTypeItems.includedItems[item].data.label
-      ),
-    });
-  }
-
-  // populate the 'other' category with combined remaining items and push to end of data array
-  feeds.push({
-    data: createData(
-      combineOtherCount(PostTypeItems.otherItems),
-      "rgb(169,169,169)",
-      "Other"
-    ),
-  });
-
-  // add filler spacing for remaining unused space
-  feeds.push({
-    data: createData(tier - currentCount, "rgb(245,245,245)", "Remaining"),
-  });
-
-  // return [feeds, tier, currentCount];
+// return
   return {
     data: feeds,
     tier: tier,
