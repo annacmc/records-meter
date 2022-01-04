@@ -72,7 +72,36 @@ export class BarChart extends React.Component {
   render() {
     return (
       <div className="chartContainer">
-        <canvas ref={this.canvasRef} />
+        <canvas ref={this.canvasRef}>
+          <p>
+            Text alternative for this canvas graphic is in the data table below.
+          </p>
+        <table
+          border="0"
+          cellPadding="5"
+          summary="This is the text alternative for the canvas graphic."
+        >
+          <caption>Records Indexed for Jetpack Search</caption>
+          <tbody>
+            <tr>
+              <th scope="col">Post Type</th>
+              {this.state?.legendItems.length &&
+                this.state.legendItems.map((item) => {
+                  return <th scope="col">{item.text}</th>;
+                })}
+            </tr>
+            <tr>
+              <th scope="row">Record Count</th>
+              {this.state?.legendItems.length &&
+                this.state.legendItems.map((item) => {
+                  return (
+                    <td>{this.props.data[item.datasetIndex].data.data}</td>
+                  );
+                })}
+            </tr>
+          </tbody>
+        </table>
+        </canvas>
         <ul className="chartLegend">
           {this.state?.legendItems.length > 0 &&
             this.state.legendItems.map((item) => {
@@ -84,7 +113,10 @@ export class BarChart extends React.Component {
                       backgroundColor: item.fillStyle,
                     }}
                   />
-                  <span className="chartLegendLabel" children={item.text} /><span className="chartLegendCount">({this.props.data[item.datasetIndex].data.data})</span>
+                  <span className="chartLegendLabel" children={item.text} />
+                  <span className="chartLegendCount">
+                    ({this.props.data[item.datasetIndex].data.data})
+                  </span>
                 </li>
               );
             })}
