@@ -74,6 +74,7 @@ export class BarChart extends React.Component {
       <div className="chartContainer">
         <canvas ref={this.canvasRef} />
         <ul className="chartLegend">
+        
           {this.state?.legendItems.length > 0 &&
             this.state.legendItems.map((item) => {
               return (
@@ -89,7 +90,7 @@ export class BarChart extends React.Component {
               );
             })}
         </ul>
-      </div>
+        </div>
     );
   }
 }

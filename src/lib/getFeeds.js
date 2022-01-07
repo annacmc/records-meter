@@ -40,7 +40,7 @@ export default function getFeeds(data, planInfo) {
   // this will be coming from @automattic/color-studio once ported into wp-admin
   let colors = ["#00BA37", "#3895BA", "#E68B28", "#AF7DD1", "#DEB100"];
 
-  if (numItems > 0 && hasValidData && hasBeenIndexed) {
+  if (numItems => 0 && hasValidData && hasBeenIndexed) {
     for (var i = 0; i < numItems; i++) {
       let theData = Object.values(data.post_type_breakdown)[i];
       let name = capitalizeFirstLetter(

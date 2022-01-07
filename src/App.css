@@ -20,6 +20,7 @@ main {
   list-style:none;
   display: inline;
   display:inline-block;
+
 }
 
 ul.chartLegend {
@@ -38,4 +39,10 @@ ul.chartLegend {
   overflow: hidden;
   text-overflow: ellipsis;
   display:inherit;
+}
+
+.noticeBox {
+  border: solid .5px lightgrey;
+  padding: 10px 10px;
+  margin: 15px;
 }

@@ -15,6 +15,9 @@ export default function getData() {
           andthenmore: 6,
           somany: 20,
         },
+        //         post_count: 0,
+        // post_type_breakdown: {
+        // },
       };
     
      const planInfo = {
