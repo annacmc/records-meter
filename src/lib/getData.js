@@ -46,7 +46,7 @@ export default function getData() {
             support_document: null,
             is_instant_search: true,
             // tier: "up_to_1k_records",
-            tier: 100, // this needs work
+            tier: 10, // this needs work
           },
         ],
         supports_instant_search: true,
