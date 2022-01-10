@@ -46,3 +46,11 @@ ul.chartLegend {
   padding: 10px 10px;
   margin: 15px;
 }
+
+
+.noticeBoxRed {
+  border: solid .5px red;
+  padding: 10px 10px;
+  color: red;
+  margin: 15px;
+}

@@ -23,11 +23,13 @@ import React from "react";
 
 export function NoticeBox(props) {
   return (
-    <div className = 'noticeBox'>
-      {props.noticeMessage && (
+    <div>
+      {props.errors && (
+            <div className = {props.className}> 
         <p>
-          {props.noticeMessage}
+          {props.errors[0]}
         </p>
+        </div>
       )}
     </div>
   );
