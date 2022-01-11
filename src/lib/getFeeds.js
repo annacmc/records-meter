@@ -68,7 +68,7 @@ export default function getFeeds(data, planInfo) {
     // will need to be updated once this plan data is fetchable via API 
 
     if (currentCount > tier){
-      errors.push("You recently surpassed "+ tier +" records and were automatically upgraded to the next billing tier of "+ (tier+100) +" max records. Learn more.");
+      errors.push("You recently surpassed "+ tier +" records and were automatically upgraded to the next billing tier of "+ (tier*10) +" max records. Learn more.");
     }
 
     // check if current indexed items is getting close to. 
