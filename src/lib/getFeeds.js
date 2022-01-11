@@ -8,6 +8,8 @@ export default function getFeeds(data, planInfo) {
   let currentCount = 0;
   let hasValidData = true;
   let hasBeenIndexed = true;
+  let errors = [];
+  let noticeBoxClassName = "noticeBox";
 
   //check for valid data coming in and catch it before it goes to far
   if (
@@ -16,6 +18,7 @@ export default function getFeeds(data, planInfo) {
     "object" !== typeof planInfo
   ) {
     hasValidData = false;
+    errors.push("does not have valid data");
   }
 
   //check if site has likely been indexed.
@@ -24,6 +27,8 @@ export default function getFeeds(data, planInfo) {
     "undefined" === typeof data.post_count
   ) {
     hasBeenIndexed = false;
+    errors.push("We weren’t able to properly index your content for Search");
+    noticeBoxClassName = "noticeBoxRed";
   }
 
   // make sure there are items there before going any further
@@ -31,6 +36,11 @@ export default function getFeeds(data, planInfo) {
     hasValidData && hasBeenIndexed
       ? Object.keys(data.post_type_breakdown).length
       : 0;
+
+  if (numItems == 0) {
+    errors.push("We weren’t able to locate any content to index for Search");
+    noticeBoxClassName = "noticeBoxRed";
+  }
 
   const count = maxRecordCount <= numItems ? maxRecordCount : numItems;
 
@@ -51,6 +61,20 @@ export default function getFeeds(data, planInfo) {
         data: createData(theData, colors[i], name),
       });
       currentCount = currentCount + theData;
+    }
+
+    // check if current indexed items is over, their plan limit
+    // note: this currently hard codes in the number of records for the next tier. 
+    // will need to be updated once this plan data is fetchable via API 
+
+    if (currentCount > tier){
+      errors.push("You recently surpassed "+ tier +" records and were automatically upgraded to the next billing tier of "+ (tier*10) +" max records. Learn more.");
+    }
+
+    // check if current indexed items is getting close to. 
+    // currently calculates when at 80% of usage
+    if (currentCount > tier * .8 && currentCount < tier ){
+      errors.push("You’re close to the max amount of records for this billing tier. Once you hit "+ tier +" indexed records, you’ll automatically be billed in the next tier. Learn more.");
     }
 
     // sort & split items into included and other
@@ -90,11 +114,13 @@ export default function getFeeds(data, planInfo) {
     }
   }
 
-// return
+  // return
   return {
     data: feeds,
     tier: tier,
     recordCount: currentCount,
+    errors: errors,
+    noticeBoxClassName: noticeBoxClassName,
   };
 }
 

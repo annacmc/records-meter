@@ -1,6 +1,7 @@
 .chartContainer {
-  height: 40px;
+  max-height: 40px; 
 }
+
 
 main {
   padding: 5px;
@@ -18,8 +19,8 @@ main {
 
 .chartLegend {
   list-style:none;
-  display: inline;
   display:inline-block;
+
 }
 
 ul.chartLegend {
@@ -38,4 +39,19 @@ ul.chartLegend {
   overflow: hidden;
   text-overflow: ellipsis;
   display:inherit;
+}
+
+.noticeBox {
+  border: solid .5px lightgrey;
+  margin-top: 80px;
+  margin-left: 5px;
+  padding: 0px 5px;
+
+}
+
+.noticeBoxRed {
+  border: solid .5px red;
+  padding: 10px 10px;
+  color: red;
+  margin: 15px;
 }

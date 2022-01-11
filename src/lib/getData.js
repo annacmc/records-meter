@@ -15,6 +15,9 @@ export default function getData() {
           andthenmore: 6,
           somany: 20,
         },
+        //         post_count: 0,
+        // post_type_breakdown: {
+        // },
       };
     
      const planInfo = {
@@ -43,7 +46,7 @@ export default function getData() {
             support_document: null,
             is_instant_search: true,
             // tier: "up_to_1k_records",
-            tier: 100, // this needs work
+            tier: 200, // this needs work
           },
         ],
         supports_instant_search: true,

@@ -4,14 +4,13 @@ import getFeeds from "./lib/getFeeds.js";
 import getData from "./lib/getData.js";
 import { BarChart } from "./components/BarChart";
 import { RecordCount } from "./components/RecordCount";
-
+import { NoticeBox } from "./components/NoticeBox";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      feed: getFeeds(getData().data,getData().planInfo)
-      // feed: getFeeds("a",getData().planInfo)
+      feed: getFeeds(getData().data, getData().planInfo),
     };
   }
 
@@ -23,6 +22,7 @@ class App extends React.Component {
           planRecordLimit={this.state.feed.tier}
         />
         <BarChart data={this.state.feed.data} />
+        <NoticeBox errors={this.state.feed.errors} className={this.state.feed.noticeBoxClassName}></NoticeBox>
       </main>
     );
   }
