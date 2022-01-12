@@ -27,7 +27,7 @@ export default function getFeeds(data, planInfo) {
     "undefined" === typeof data.post_count
   ) {
     hasBeenIndexed = false;
-    errors.push("Your content has not yet been indexed for Search");
+    errors.push(["Your content has not yet been indexed for Search"]);
   }
 
   // make sure there are items there before going any further
@@ -37,8 +37,7 @@ export default function getFeeds(data, planInfo) {
       : 0;
 
   if (numItems == 0) {
-    errors.push("We weren’t able to locate any content to index for Search");
-    noticeBoxClassName = "noticeBoxRed";
+    errors.push(["We weren’t able to locate any content to index for Search",'noticeBoxRed']);
   }
 
   const count = maxRecordCount <= numItems ? maxRecordCount : numItems;
@@ -67,13 +66,13 @@ export default function getFeeds(data, planInfo) {
     // will need to be updated once this plan data is fetchable via API 
 
     if (currentCount > tier){
-      errors.push("You recently surpassed "+ tier +" records and were automatically upgraded to the next billing tier of "+ (tier*10) +" max records. Learn more.");
+      errors.push(["You recently surpassed "+ tier +" records and were automatically upgraded to the next billing tier of "+ (tier*10) +" max records. Learn more."]);
     }
 
     // check if current indexed items is getting close to. 
     // currently calculates when at 80% of usage
     if (currentCount > tier * .8 && currentCount < tier ){
-      errors.push("You’re close to the max amount of records for this billing tier. Once you hit "+ tier +" indexed records, you’ll automatically be billed in the next tier. Learn more.");
+      errors.push(["You’re close to the max amount of records for this billing tier. Once you hit "+ tier +" indexed records, you’ll automatically be billed in the next tier. Learn more."]);
     }
 
     // sort & split items into included and other

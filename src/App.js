@@ -17,7 +17,7 @@ class App extends React.Component {
   render() {
     return (
       <main>
-         <NoticeBox errors={this.state.feed.errors} className={this.state.feed.noticeBoxClassName}></NoticeBox>
+         <NoticeBox errors={this.state.feed.errors}></NoticeBox>
         <RecordCount
           recordCount={this.state.feed.recordCount}
           planRecordLimit={this.state.feed.tier}

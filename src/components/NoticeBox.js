@@ -1,15 +1,17 @@
 import React from "react";
 
 export function NoticeBox(props) {
-  if ( ! props.errors ) {
+  if (!props.errors) {
     return null;
   }
 
+  let noticeBoxClassName = props.errors[0][1]
+    ? props.errors[0][1]
+    : "noticeBox";
+
   return (
-    <div className={ props.className }> 
-        <p>
-          {props.errors[0]}
-        </p>
+    <div className={noticeBoxClassName}>
+      <p>{props.errors[0]}</p>
     </div>
   );
 }
