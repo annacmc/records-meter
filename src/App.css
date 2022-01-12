@@ -43,7 +43,6 @@ ul.chartLegend {
 
 .noticeBox {
   border: solid .5px lightgrey;
-  margin-top: 80px;
   margin-left: 5px;
   padding: 0px 5px;
 
@@ -51,7 +50,7 @@ ul.chartLegend {
 
 .noticeBoxRed {
   border: solid .5px red;
-  padding: 10px 10px;
   color: red;
-  margin: 15px;
+  margin-left: 5px;
+  padding: 0px 5px;
 }
