@@ -2,7 +2,7 @@ import React from "react";
 
 export function RecordCount(props) {
   return (
-    <div>
+    <div className="recordCount">
       {props.recordCount && props.planRecordLimit && (
         <p>
           {props.recordCount} records indexed out of the {props.planRecordLimit}{" "}
