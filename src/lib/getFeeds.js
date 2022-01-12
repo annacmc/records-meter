@@ -18,7 +18,7 @@ export default function getFeeds(data, planInfo) {
     "object" !== typeof planInfo
   ) {
     hasValidData = false;
-    errors.push("does not have valid data");
+    errors.push("We weren’t able to properly locate your content for Search");
   }
 
   //check if site has likely been indexed.
@@ -27,8 +27,7 @@ export default function getFeeds(data, planInfo) {
     "undefined" === typeof data.post_count
   ) {
     hasBeenIndexed = false;
-    errors.push("We weren’t able to properly index your content for Search");
-    noticeBoxClassName = "noticeBoxRed";
+    errors.push("Your content has not yet been indexed for Search");
   }
 
   // make sure there are items there before going any further
