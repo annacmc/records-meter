@@ -37,8 +37,7 @@ export default function getFeeds(data, planInfo) {
 
   if (numItems == 0) {
     notices.push([
-      "We weren’t able to locate any content to index for Search",
-      "noticeBoxRed",
+      "We weren’t able to locate any content to Search to index. Perhaps you don't yet have any posts or pages?"
     ]);
   }
 
@@ -71,7 +70,7 @@ export default function getFeeds(data, planInfo) {
       notices.push([
         "You recently surpassed " +
           tier +
-          " records and were automatically upgraded to the next billing tier of " +
+          " records and will be automatically upgraded to the next billing tier of " +
           tier * 10 +
           " max records. Learn more.",
       ]);
