@@ -1,6 +1,10 @@
 import React from "react";
 
 export function RecordCount(props) {
+  if (!props.recordCount || !props.planRecordLimit) {
+    return null;
+  }
+
   return (
     <div className="recordCount">
       {props.recordCount && props.planRecordLimit && (
