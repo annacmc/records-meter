@@ -22,15 +22,20 @@
 import React from "react";
 
 export function NoticeBox(props) {
+
+  if ( props.errors.length == 0 ) {
+    return null;
+  }
+
   return (
-    <div>
-      {props.errors && (
-            <div className = {props.className}> 
+    <div className = {props.className}> 
+      {props.errors && (    
         <p>
           {props.errors[0]}
         </p>
-        </div>
       )}
     </div>
   );
 }
+
+export default NoticeBox;
