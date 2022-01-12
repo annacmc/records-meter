@@ -1,20 +1,20 @@
 export default function getData() {
 
     const data = {
-        // last_indexed_date: "2021-07-06T19:35:18+00:00",
-        // post_count: 249,
-        // post_type_breakdown: {
-        //   post: 104,
-        //   page: 17,
-        //   attachment: 15,
-        //   anotherone: 21,
-        //   averyveryextrasuperlongernamesposttypethatgoesonandonandone: 38,
-        //   more: 22,
-        //   andmore: 4,
-        //   moremoremore: 2,
-        //   andthenmore: 6,
-        //   somany: 20,
-        // },
+        last_indexed_date: "2021-07-06T19:35:18+00:00",
+        post_count: 249,
+        post_type_breakdown: {
+          post: 104,
+          page: 17,
+          attachment: 15,
+          anotherone: 21,
+          averyveryextrasuperlongernamesposttypethatgoesonandonandone: 38,
+          more: 22,
+          andmore: 4,
+          moremoremore: 2,
+          andthenmore: 6,
+          somany: 20,
+        },
         //         post_count: 0,
         // post_type_breakdown: {
         // },
@@ -46,7 +46,7 @@ export default function getData() {
             support_document: null,
             is_instant_search: true,
             // tier: "up_to_1k_records",
-            tier: 1000, // this needs work
+            tier: 200, // this needs work
           },
         ],
         supports_instant_search: true,

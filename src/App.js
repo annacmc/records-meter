@@ -17,13 +17,13 @@ class App extends React.Component {
   render() {
     return (
       <main>
-         <NoticeBox notices={this.state.feed.notices}></NoticeBox>
         <RecordCount
           recordCount={this.state.feed.recordCount}
           planRecordLimit={this.state.feed.tier}
         />
         <BarChart data={this.state.feed.data} />
-             </main>
+        <NoticeBox notices={this.state.feed.notices}></NoticeBox>
+      </main>
     );
   }
 }
