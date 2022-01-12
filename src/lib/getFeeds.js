@@ -119,7 +119,7 @@ export default function getFeeds(data, planInfo) {
     data: feeds,
     tier: tier,
     recordCount: currentCount,
-    errors: errors,
+    errors: errors.length > 0 ? errors : null,
     noticeBoxClassName: noticeBoxClassName,
   };
 }
