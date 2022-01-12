@@ -11,7 +11,7 @@ export function NoticeBox(props) {
 
   return (
     <div className={noticeBoxClassName}>
-      <p>{props.notices[0]}</p>
+      <p>{props.notices[0][0]}</p>
     </div>
   );
 }
