@@ -103,10 +103,10 @@ export default function getFeeds(data, planInfo) {
     data: feeds,
     tier: tier,
     recordCount: currentCount,
-    hasbeenindexed: hasBeenIndexed,
-    hasValidData: hasValidData,
-    hasItems: hasItems,
-    isValid: isValid,
+    hasBeenIndexed,
+    hasValidData,
+    hasItems,
+    isValid,
   };
 }
 
