@@ -1,17 +1,65 @@
 import React from "react";
 
 export function NoticeBox(props) {
-  if (!props.notices) {
+  let notices = [];
+  let currentCount = props.recordCount;
+  let tier = props.planRecordLimit;
+
+  // check data is valid
+  if (props.hasValidData == false) {
+    notices.push([
+      "We weren’t able to properly locate your content for Search",
+      "noticeBoxRed",
+    ]);
+  }
+
+  // check site has been indexed
+  if (props.hasBeenIndexed == false) {
+    notices.push(["Your content has not yet been indexed for Search"]);
+  }
+
+  // check at least one indexable item
+  if (props.hasItems == false) {
+    notices.push([
+      "We weren’t able to locate any content to Search to index. Perhaps you don't yet have any posts or pages?",
+    ]);
+  }
+
+  // check if current indexed items is over, their plan limit
+  // note: this currently hard codes in the number of records for the next tier.
+  // will need to be updated once this plan data is fetchable via API
+
+  if (currentCount > tier) {
+    notices.push([
+      "You recently surpassed " +
+        tier +
+        " records and will be automatically upgraded to the next billing tier of " +
+        tier * 10 +
+        " max records. Learn more.",
+    ]);
+  }
+
+  // check if current indexed items is getting close to.
+  // currently calculates when at 80% of usage
+  if (currentCount > tier * 0.8 && currentCount < tier) {
+    notices.push([
+      "You’re close to the max amount of records for this billing tier. Once you hit " +
+        tier +
+        " indexed records, you’ll automatically be billed in the next tier. Learn more.",
+    ]);
+  }
+
+  if (!notices) {
     return null;
   }
 
-  let noticeBoxClassName = props.notices[0][1]
-    ? props.notices[0][1]
+  let noticeBoxClassName = notices[0][1]
+    ? notices[0][1]
     : "noticeBox";
 
   return (
     <div className={noticeBoxClassName}>
-      <p>{props.notices[0][0]}</p>
+      <p>{notices}</p>
     </div>
   );
 }
