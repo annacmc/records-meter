@@ -67,7 +67,7 @@ export class BarChart extends React.Component {
     });
 
     if (this.props.isValid == true) {
-    this.setState({ legendItems: this.myChart.legend.legendItems });
+      this.setState({ legendItems: this.myChart.legend.legendItems });
     }
   }
 

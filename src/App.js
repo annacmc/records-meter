@@ -15,23 +15,24 @@ class App extends React.Component {
   }
 
   render() {
-
     return (
       <main>
         <RecordCount
           recordCount={this.state.feed.recordCount}
           planRecordLimit={this.state.feed.tier}
         />
-        <BarChart data={this.state.feed.data}
-        isValid = {this.state.feed.isValid} />
+        <BarChart
+          data={this.state.feed.data}
+          isValid={this.state.feed.isValid}
+        />
 
         <NoticeBox
           notices={this.state.feed.notices}
           recordCount={this.state.feed.recordCount}
           planRecordLimit={this.state.feed.tier}
-          hasBeenIndexed = {this.state.feed.hasBeenIndexed}
-          hasValidData= {this.state.feed.hasValidData}
-          hasItems = {this.state.feed.hasItems}
+          hasBeenIndexed={this.state.feed.hasBeenIndexed}
+          hasValidData={this.state.feed.hasValidData}
+          hasItems={this.state.feed.hasItems}
         ></NoticeBox>
       </main>
     );
