@@ -2,8 +2,6 @@ import React from "react";
 
 export function NoticeBox(props) {
   let notices = [];
-  let currentCount = props.recordCount;
-  let tier = props.planRecordLimit;
 
   // check data is valid
   if (props.hasValidData == false) {
@@ -29,37 +27,38 @@ export function NoticeBox(props) {
   // note: this currently hard codes in the number of records for the next tier.
   // will need to be updated once this plan data is fetchable via API
 
-  if (currentCount > tier) {
+  if (props.recordCount > props.planRecordLimit) {
     notices.push([
       "You recently surpassed " +
-        tier +
+        props.planRecordLimit +
         " records and will be automatically upgraded to the next billing tier of " +
-        tier * 10 +
+        props.planRecordLimit * 10 +
         " max records. Learn more.",
     ]);
   }
 
   // check if current indexed items is getting close to.
   // currently calculates when at 80% of usage
-  if (currentCount > tier * 0.8 && currentCount < tier) {
+  if (
+    props.recordCount > props.planRecordLimit * 0.8 &&
+    props.recordCount < props.planRecordLimit
+  ) {
     notices.push([
       "You’re close to the max amount of records for this billing tier. Once you hit " +
-        tier +
+        props.planRecordLimit +
         " indexed records, you’ll automatically be billed in the next tier. Learn more.",
     ]);
   }
 
-  if (!notices) {
+  if (!notices || notices.length < 1) {
     return null;
   }
 
-  let noticeBoxClassName = notices[0][1]
-    ? notices[0][1]
-    : "noticeBox";
+  let noticeBoxClassName = notices[0][1] ? notices[0][1] : "noticeBox";
 
   return (
     <div className={noticeBoxClassName}>
-      <p>{notices}</p>
+      <p>{notices[0][0]}</p>
     </div>
   );
 }
