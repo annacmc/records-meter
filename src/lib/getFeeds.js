@@ -95,6 +95,9 @@ export default function getFeeds(data, planInfo) {
     }
   }
 
+  // set a var to check all the data is valid (this helps determine whether to output a chart)
+  let isValid = hasBeenIndexed && hasValidData && hasItems ? true : false;
+
   // return
   return {
     data: feeds,
@@ -103,6 +106,7 @@ export default function getFeeds(data, planInfo) {
     hasbeenindexed: hasBeenIndexed,
     hasValidData: hasValidData,
     hasItems: hasItems,
+    isValid: isValid,
   };
 }
 
