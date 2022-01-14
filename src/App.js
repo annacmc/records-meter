@@ -27,7 +27,6 @@ class App extends React.Component {
         />
 
         <NoticeBox
-          notices={this.state.feed.notices}
           recordCount={this.state.feed.recordCount}
           planRecordLimit={this.state.feed.tier}
           hasBeenIndexed={this.state.feed.hasBeenIndexed}
