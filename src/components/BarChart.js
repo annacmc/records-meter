@@ -66,13 +66,13 @@ export class BarChart extends React.Component {
       },
     });
 
-    if (this.props.isValid == true) {
+    if (this.props.isValid === true) {
       this.setState({ legendItems: this.myChart.legend.legendItems });
     }
   }
 
   render() {
-    if (this.props.isValid == false) {
+    if (this.props.isValid === false) {
       return null;
     }
     return (
