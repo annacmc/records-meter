@@ -5,10 +5,9 @@ export function NoticeBox(props) {
 
   // check data is valid
   if (props.hasValidData === false) {
-    notices.push([
-      "We weren’t able to properly locate your content for Search",
-      "noticeBoxRed",
-    ]);
+    notices.push({ message: "We weren’t able to properly locate your content for Search",
+      isImportant: true}
+    );
   }
 
   // check site has been indexed
@@ -53,7 +52,7 @@ export function NoticeBox(props) {
     return null;
   }
 
-  let noticeBoxClassName = notices[0][1] ? notices[0][1] : "noticeBox";
+  let noticeBoxClassName = notices[0].isImportant ? "noticeBoxRed" : "noticeBox";
 
   return (
     <div className={noticeBoxClassName}>
