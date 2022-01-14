@@ -1,14 +1,14 @@
-export default function getFeeds(data, planInfo) {
+export default function getRecordInfo(data, planInfo) {
   // set max number of record types to display
   let maxRecordCount = 5;
 
   // sets up some basic counts and arrays
-  let feeds = [];
+  let recordInfo = [];
   let postTypeBreakdown = [];
   let currentCount = 0;
   let hasValidData = true;
   let hasBeenIndexed = true;
-  let notices = [];
+  let hasItems = true;
 
   //check for valid data coming in and catch it before it goes to far
   if (
@@ -17,7 +17,6 @@ export default function getFeeds(data, planInfo) {
     "object" !== typeof planInfo
   ) {
     hasValidData = false;
-    notices.push(["We weren’t able to properly locate your content for Search","noticeBoxRed"]);
   }
 
   //check if site has likely been indexed.
@@ -26,7 +25,6 @@ export default function getFeeds(data, planInfo) {
     "undefined" === typeof data.post_count
   ) {
     hasBeenIndexed = false;
-    notices.push(["Your content has not yet been indexed for Search"]);
   }
 
   // make sure there are items there before going any further
@@ -35,13 +33,9 @@ export default function getFeeds(data, planInfo) {
       ? Object.keys(data.post_type_breakdown).length
       : 0;
 
-  if (numItems == 0) {
-    notices.push([
-      "We weren’t able to locate any content to Search to index. Perhaps you don't yet have any posts or pages?"
-    ]);
+  if (numItems === 0) {
+    hasItems = false;
   }
-
-  const count = maxRecordCount <= numItems ? maxRecordCount : numItems;
 
   let tier = Object.values(planInfo.search_subscriptions[0])[22];
 
@@ -62,30 +56,6 @@ export default function getFeeds(data, planInfo) {
       currentCount = currentCount + theData;
     }
 
-    // check if current indexed items is over, their plan limit
-    // note: this currently hard codes in the number of records for the next tier.
-    // will need to be updated once this plan data is fetchable via API
-
-    if (currentCount > tier) {
-      notices.push([
-        "You recently surpassed " +
-          tier +
-          " records and will be automatically upgraded to the next billing tier of " +
-          tier * 10 +
-          " max records. Learn more.",
-      ]);
-    }
-
-    // check if current indexed items is getting close to.
-    // currently calculates when at 80% of usage
-    if (currentCount > tier * 0.8 && currentCount < tier) {
-      notices.push([
-        "You’re close to the max amount of records for this billing tier. Once you hit " +
-          tier +
-          " indexed records, you’ll automatically be billed in the next tier. Learn more.",
-      ]);
-    }
-
     // sort & split items into included and other
     const PostTypeItems = splitUsablePostTypes(
       postTypeBreakdown,
@@ -93,9 +63,9 @@ export default function getFeeds(data, planInfo) {
       maxRecordCount
     );
 
-    // push includedItems into the feeds
+    // push includedItems into the recordInfo
     for (var item in PostTypeItems.includedItems) {
-      feeds.push({
+      recordInfo.push({
         data: createData(
           PostTypeItems.includedItems[item].data.data[0],
           colors[item],
@@ -106,7 +76,7 @@ export default function getFeeds(data, planInfo) {
 
     // populate the 'other' category with combined remaining items and push to end of data array
     if (PostTypeItems.otherItems.length > 0) {
-      feeds.push({
+      recordInfo.push({
         data: createData(
           combineOtherCount(PostTypeItems.otherItems),
           "rgb(169,169,169)",
@@ -117,19 +87,24 @@ export default function getFeeds(data, planInfo) {
 
     // if there is remaining unused space in tier, add filler spacing to chart
     if (tier - currentCount > 0) {
-      feeds.push({
+      recordInfo.push({
         data: createData(tier - currentCount, "rgb(245,245,245)", "Remaining"),
       });
     }
   }
 
+  // set a var to check all the data is valid (this helps determine whether to output a chart)
+  const isValid = hasBeenIndexed && hasValidData && hasItems;
+
   // return
   return {
-    data: feeds,
+    data: recordInfo,
     tier: tier,
     recordCount: currentCount,
-    notices: notices.length > 0 ? notices : null,
-
+    hasBeenIndexed,
+    hasValidData,
+    hasItems,
+    isValid,
   };
 }
 

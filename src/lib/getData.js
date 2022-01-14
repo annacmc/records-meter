@@ -1,7 +1,7 @@
 export default function getData() {
 
     const data = {
-        last_indexed_date: "2021-07-06T19:35:18+00:00",
+        // last_indexed_date: "2021-07-06T19:35:18+00:00",
         post_count: 249,
         post_type_breakdown: {
           post: 104,
@@ -46,7 +46,7 @@ export default function getData() {
             support_document: null,
             is_instant_search: true,
             // tier: "up_to_1k_records",
-            tier: 200, // this needs work
+            tier: 2000, // this needs work
           },
         ],
         supports_instant_search: true,
