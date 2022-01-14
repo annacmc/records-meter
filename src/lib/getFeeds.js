@@ -33,11 +33,9 @@ export default function getFeeds(data, planInfo) {
       ? Object.keys(data.post_type_breakdown).length
       : 0;
 
-  if (numItems == 0) {
+  if (numItems === 0) {
     hasItems = false;
   }
-
-  const count = maxRecordCount <= numItems ? maxRecordCount : numItems;
 
   let tier = Object.values(planInfo.search_subscriptions[0])[22];
 
@@ -96,7 +94,7 @@ export default function getFeeds(data, planInfo) {
   }
 
   // set a var to check all the data is valid (this helps determine whether to output a chart)
-  let isValid = hasBeenIndexed && hasValidData && hasItems ? true : false;
+  const isValid = hasBeenIndexed && hasValidData && hasItems;
 
   // return
   return {
