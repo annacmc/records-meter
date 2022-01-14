@@ -1,9 +1,9 @@
-export default function getFeeds(data, planInfo) {
+export default function getRecordInfo(data, planInfo) {
   // set max number of record types to display
   let maxRecordCount = 5;
 
   // sets up some basic counts and arrays
-  let feeds = [];
+  let recordInfo = [];
   let postTypeBreakdown = [];
   let currentCount = 0;
   let hasValidData = true;
@@ -63,9 +63,9 @@ export default function getFeeds(data, planInfo) {
       maxRecordCount
     );
 
-    // push includedItems into the feeds
+    // push includedItems into the recordInfo
     for (var item in PostTypeItems.includedItems) {
-      feeds.push({
+      recordInfo.push({
         data: createData(
           PostTypeItems.includedItems[item].data.data[0],
           colors[item],
@@ -76,7 +76,7 @@ export default function getFeeds(data, planInfo) {
 
     // populate the 'other' category with combined remaining items and push to end of data array
     if (PostTypeItems.otherItems.length > 0) {
-      feeds.push({
+      recordInfo.push({
         data: createData(
           combineOtherCount(PostTypeItems.otherItems),
           "rgb(169,169,169)",
@@ -87,7 +87,7 @@ export default function getFeeds(data, planInfo) {
 
     // if there is remaining unused space in tier, add filler spacing to chart
     if (tier - currentCount > 0) {
-      feeds.push({
+      recordInfo.push({
         data: createData(tier - currentCount, "rgb(245,245,245)", "Remaining"),
       });
     }
@@ -98,7 +98,7 @@ export default function getFeeds(data, planInfo) {
 
   // return
   return {
-    data: feeds,
+    data: recordInfo,
     tier: tier,
     recordCount: currentCount,
     hasBeenIndexed,
