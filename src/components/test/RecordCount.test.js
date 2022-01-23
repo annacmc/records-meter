@@ -17,7 +17,7 @@
 
 
 test("record count output text is correct", () => {
-    // test without being indexed
+
     const { rerender } = render(
       <RecordCount recordCount={20} planRecordLimit={100}></RecordCount>
     );
@@ -27,4 +27,17 @@ test("record count output text is correct", () => {
     ).toBeVisible();
 
   });
+
+
+  test("record count does not output a message if there are no records to count", () => {
+
+    const { rerender } = render(
+      <RecordCount></RecordCount>
+    );
+
+    const recordCountMessage = screen.queryByText("records indexed out of the")
+    expect(recordCountMessage).not.toBeInTheDocument()
+
+  }
+  );
   

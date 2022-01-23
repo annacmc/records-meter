@@ -1,7 +1,7 @@
 export default function getData() {
 
     const data = {
-        // last_indexed_date: "2021-07-06T19:35:18+00:00",
+        last_indexed_date: "2021-07-06T19:35:18+00:00",
         post_count: 249,
         post_type_breakdown: {
           post: 104,

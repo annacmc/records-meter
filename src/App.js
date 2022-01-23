@@ -12,6 +12,7 @@ class App extends React.Component {
     this.state = {
       recordInfo: getRecordInfo(getData().data, getData().planInfo),
     };
+    console.log(this.state.recordInfo.data);
   }
 
   render() {
