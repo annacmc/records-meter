@@ -6,7 +6,7 @@ export function RecordCount(props) {
   }
 
   return (
-    <div className="recordCount">
+    <div data-testid="recordCount"  className="recordCount">
       {props.recordCount && props.planRecordLimit && (
         <p>
           {props.recordCount} records indexed out of the {props.planRecordLimit}{" "}
