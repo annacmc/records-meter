@@ -2,12 +2,6 @@
   max-height: 40px; 
 }
 
-
-main {
-  padding: 5px;
-
-}
-
 .chartLegendBox {
   margin-right: 3px;
   margin-left: 6px;
@@ -41,6 +35,14 @@ ul.chartLegend {
   display:inherit;
 }
 
+.countText {
+  font-weight:500;
+}
+
+main {
+  padding: 5px;
+}
+
 .noticeBox {
   border: solid .5px lightgrey;
   margin-left: 5px;
@@ -53,4 +55,8 @@ ul.chartLegend {
   color: red;
   margin-left: 5px;
   padding: 0px 5px;
+}
+
+.recordCount {
+  margin-left: 10px;
 }

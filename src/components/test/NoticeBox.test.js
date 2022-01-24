@@ -42,11 +42,11 @@ test("notice box outputs the correct messages", () => {
     ></NoticeBox>
   );
 
-  // expect(
-  //   screen.getByText(
-  //     "We weren’t able to properly locate your content for Search"
-  //   )
-  // ).toBeVisible();
+  expect(
+    screen.getByText(
+      "We weren’t able to properly locate your content for Search"
+    )
+  ).toBeVisible();
 
   // test without items
   rerender(
@@ -102,7 +102,7 @@ test("notice box outputs the correct messages", () => {
 });
 
 
-test("notice box doesn't output when there is nothing to notify about", () => {
+test("notice box doesn't output at all when there is nothing to notify about", () => {
     // test without being indexed
     const { rerender } = render(
       <NoticeBox
@@ -113,5 +113,8 @@ test("notice box doesn't output when there is nothing to notify about", () => {
         hasItems={true}
       ></NoticeBox>
     );
+
+    const noticeBoxMessage = screen.queryByTestId('noticeBox')
+    expect(noticeBoxMessage).not.toBeInTheDocument()
   
     });  

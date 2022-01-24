@@ -1,4 +1,4 @@
-import * as getFeeds from "./getFeeds";
+import * as getRecordInfo from "./getRecordInfo";
 
 const testData = {
   last_indexed_date: "2021-07-06T19:35:18+00:00",
@@ -76,7 +76,7 @@ test("compares post_count to post_type_breakdown summed", () => {
 test("splits posts into usable and other", () => {
   const maxRecordCount = 1;
 
-  const splitPostTypes = getFeeds.splitUsablePostTypes(
+  const splitPostTypes = getRecordInfo.splitUsablePostTypes(
     postTypeBreakdown,
     testData.post_count,
     maxRecordCount
@@ -86,7 +86,7 @@ test("splits posts into usable and other", () => {
 });
 
 test("creates a data object using createData", () => {
-  const newObject = getFeeds.createData(20, "rgb(245,245,245)", "Testing");
+  const newObject = getRecordInfo.createData(20, "rgb(245,245,245)", "Testing");
 
   expect(newObject).toEqual({
     data: [20],
@@ -97,12 +97,12 @@ test("creates a data object using createData", () => {
 
 test("capitalizes first letter using capitalizeFirstLetter", () => {
   const stringToTest = "i am a string";
-  const capializedString = getFeeds.capitalizeFirstLetter(stringToTest);
+  const capializedString = getRecordInfo.capitalizeFirstLetter(stringToTest);
 
   expect(capializedString).toBe("I am a string");
 });
 
 test("combine count of remaining items", () => {
-  const otherCategory = getFeeds.combineOtherCount(postTypeBreakdown);
+  const otherCategory = getRecordInfo.combineOtherCount(postTypeBreakdown);
   expect(otherCategory).toBe(38);
 });

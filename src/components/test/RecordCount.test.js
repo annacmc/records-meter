@@ -29,14 +29,14 @@ test("record count output text is correct", () => {
   });
 
 
-  test("record count does not output a message if there are no records to count", () => {
+  test("record count does not output anything if there are no records to count", () => {
 
     const { rerender } = render(
       <RecordCount></RecordCount>
     );
 
-    const recordCountMessage = screen.queryByText("records indexed out of the")
-    expect(recordCountMessage).not.toBeInTheDocument()
+    const recordCount = screen.queryByTestId('recordCount')
+    expect(recordCount).not.toBeInTheDocument()
 
   }
   );
