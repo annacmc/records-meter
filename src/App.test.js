@@ -19,8 +19,8 @@ jest.mock("./components/BarChart", () => ({
   BarChart: () => null,
 }));
 
-describe("render the app container", () => {
-  test("app loads", () => {
+describe("load the app", () => {
+  test("container renders", () => {
     const { rerender } = render(<App />);
 
     const recordMeterContainer = screen.queryByTestId("recordMeter");
