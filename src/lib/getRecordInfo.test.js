@@ -1,4 +1,4 @@
-import * as getRecordInfo from "./getRecordInfo";
+import { splitUsablePostTypes, capitalizeFirstLetter, combineOtherCount, createData } from "./getRecordInfo";
 
 const testData = {
   last_indexed_date: "2021-07-06T19:35:18+00:00",
@@ -77,10 +77,10 @@ describe("API data is converted into record info ", () => {
     );
 });
 
-  test("splits posts into usable and other", () => {
+  test("posts are correctly split into usable and other", () => {
     const maxRecordCount = 1;
 
-    const splitPostTypes = getRecordInfo.splitUsablePostTypes(
+    const splitPostTypes = splitUsablePostTypes(
       postTypeBreakdown,
       testData.post_count,
       maxRecordCount
@@ -90,7 +90,7 @@ describe("API data is converted into record info ", () => {
   });
 
   test("creates a data object using createData", () => {
-    const newObject = getRecordInfo.createData(
+    const newObject = createData(
       20,
       "rgb(245,245,245)",
       "Testing"
@@ -105,13 +105,13 @@ describe("API data is converted into record info ", () => {
 
   test("first letter of string is capitalized", () => {
     const stringToTest = "i am a string";
-    const capializedString = getRecordInfo.capitalizeFirstLetter(stringToTest);
+    const capializedString = capitalizeFirstLetter(stringToTest);
 
     expect(capializedString).toBe("I am a string");
   });
 
-  test("combine count of remaining items sums correctly", () => {
-    const otherCategory = getRecordInfo.combineOtherCount(postTypeBreakdown);
+  test("combine count of remaining items sums", () => {
+    const otherCategory = combineOtherCount(postTypeBreakdown);
     expect(otherCategory).toBe(38);
   });
 });
