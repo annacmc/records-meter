@@ -55,7 +55,7 @@ export function NoticeBox(props) {
   let noticeBoxClassName = notices[0].isImportant ? "noticeBoxRed" : "noticeBox";
 
   return (
-    <div className={noticeBoxClassName}>
+    <div data-testid="noticeBox" className={noticeBoxClassName}>
       <p>{notices[0].message}</p>
     </div>
   );
