@@ -1,4 +1,4 @@
-import { splitUsablePostTypes, capitalizeFirstLetter, combineOtherCount, createData } from "./getRecordInfo";
+import { splitUsablePostTypes, capitalizeFirstLetter, combineOtherCount, createData } from "./recordInfo";
 
 const testData = {
   last_indexed_date: "2021-07-06T19:35:18+00:00",
