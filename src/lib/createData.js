@@ -1,4 +1,4 @@
-export default function getData() {
+export default function createData() {
 
     const data = {
         last_indexed_date: "2021-07-06T19:35:18+00:00",
