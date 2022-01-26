@@ -68,41 +68,50 @@ const testPlanInfo = {
   default_upgrade_bill_period: "monthly",
 };
 
-test("compares post_count to post_type_breakdown summed", () => {
-  const sumValues = (obj) => Object.values(obj).reduce((a, b) => a + b);
-  expect(testData.post_count).toEqual(sumValues(testData.post_type_breakdown));
+describe("API data is converted into record info ", () => {
+
+  test("the total post count equals the post_type_breakdown values summed", () => {
+    const sumValues = (obj) => Object.values(obj).reduce((a, b) => a + b);
+    expect(testData.post_count).toEqual(
+      sumValues(testData.post_type_breakdown)
+    );
 });
 
-test("splits posts into usable and other", () => {
-  const maxRecordCount = 1;
+  test("splits posts into usable and other", () => {
+    const maxRecordCount = 1;
 
-  const splitPostTypes = getRecordInfo.splitUsablePostTypes(
-    postTypeBreakdown,
-    testData.post_count,
-    maxRecordCount
-  );
-  expect(splitPostTypes.includedItems.length).toBe(maxRecordCount);
-  expect(splitPostTypes.otherItems.length).toBe(2);
-});
-
-test("creates a data object using createData", () => {
-  const newObject = getRecordInfo.createData(20, "rgb(245,245,245)", "Testing");
-
-  expect(newObject).toEqual({
-    data: [20],
-    label: "Testing",
-    backgroundColor: "rgb(245,245,245)",
+    const splitPostTypes = getRecordInfo.splitUsablePostTypes(
+      postTypeBreakdown,
+      testData.post_count,
+      maxRecordCount
+    );
+    expect(splitPostTypes.includedItems.length).toBe(maxRecordCount);
+    expect(splitPostTypes.otherItems.length).toBe(2);
   });
-});
 
-test("capitalizes first letter using capitalizeFirstLetter", () => {
-  const stringToTest = "i am a string";
-  const capializedString = getRecordInfo.capitalizeFirstLetter(stringToTest);
+  test("creates a data object using createData", () => {
+    const newObject = getRecordInfo.createData(
+      20,
+      "rgb(245,245,245)",
+      "Testing"
+    );
 
-  expect(capializedString).toBe("I am a string");
-});
+    expect(newObject).toEqual({
+      data: [20],
+      label: "Testing",
+      backgroundColor: "rgb(245,245,245)",
+    });
+  });
 
-test("combine count of remaining items", () => {
-  const otherCategory = getRecordInfo.combineOtherCount(postTypeBreakdown);
-  expect(otherCategory).toBe(38);
+  test("first letter of string is capitalized", () => {
+    const stringToTest = "i am a string";
+    const capializedString = getRecordInfo.capitalizeFirstLetter(stringToTest);
+
+    expect(capializedString).toBe("I am a string");
+  });
+
+  test("combine count of remaining items sums correctly", () => {
+    const otherCategory = getRecordInfo.combineOtherCount(postTypeBreakdown);
+    expect(otherCategory).toBe(38);
+  });
 });
