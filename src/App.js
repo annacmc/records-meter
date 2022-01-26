@@ -16,7 +16,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <main>
+      <main data-testid="recordMeter">
         <RecordCount
           recordCount={this.state.recordInfo.recordCount}
           planRecordLimit={this.state.recordInfo.tier}
